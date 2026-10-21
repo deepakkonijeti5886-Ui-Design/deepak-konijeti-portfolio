@@ -20,7 +20,7 @@ export const ServiceSection: React.FC<ServiceSectionProps> = ({ onNavigateToProj
           <span className="text-[11px] font-mono font-bold tracking-[0.25em] text-gray-400 uppercase mb-3 text-right">
             SERVICES & EXPERTISE
           </span>
-          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none text-right text-metallic uppercase">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] leading-[1.05] text-right text-metallic uppercase font-display">
             WHAT WE
             <br />
             CAN DO

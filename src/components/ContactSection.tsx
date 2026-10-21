@@ -46,7 +46,7 @@ export const ContactSection: React.FC = () => {
           <span className="text-[11px] font-mono font-bold tracking-[0.25em] text-gray-400 uppercase mb-3 block">
             GET IN TOUCH
           </span>
-          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase text-metallic leading-none">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] uppercase text-metallic leading-none font-display">
             LET'S TALK
           </h2>
         </div>

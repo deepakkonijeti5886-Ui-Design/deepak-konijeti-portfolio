@@ -7,12 +7,12 @@ export const AboutSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Top Header & Intro Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Label + Massive Metallic "Intro" */}
+          {/* Left Column: Label + Sleek Metallic "Intro" */}
           <div className="lg:col-span-5 flex flex-col justify-start">
             <span className="text-[11px] font-mono font-bold tracking-[0.25em] text-gray-400 uppercase mb-4">
               ABOUT ME
             </span>
-            <h2 className="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-[-0.05em] leading-none text-metallic uppercase select-none font-display">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-[-0.03em] leading-none text-metallic uppercase select-none font-display">
               Intro
             </h2>
           </div>

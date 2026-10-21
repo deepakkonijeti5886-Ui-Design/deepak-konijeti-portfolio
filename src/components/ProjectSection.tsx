@@ -12,7 +12,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ onOpenCaseStudy 
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20 md:mb-28">
           <div>
-            <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-[-0.05em] uppercase select-none font-display">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] uppercase select-none font-display">
               <span className="text-metallic">SELECTED</span>{' '}
               <span className="font-light italic text-gray-300 font-editorial lowercase">work</span>
             </h2>
