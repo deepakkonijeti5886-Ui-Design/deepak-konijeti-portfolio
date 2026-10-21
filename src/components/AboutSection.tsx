@@ -28,7 +28,7 @@ export const AboutSection: React.FC = () => {
               </p>
 
               <p className="text-sm sm:text-base md:text-lg text-gray-400 font-light leading-relaxed mt-4 sm:mt-6">
-                Specializing in React.js, TypeScript, Server-Driven UI (SDUI), and conversion-optimized checkout funnels on major platforms like Clicks South Africa (+18.4% conversion uplift, 15% reduction in cart abandonment).
+                Key work includes driving e-commerce performance on Clicks South Africa (clicks.co.za) — refactoring the checkout funnel to reduce cart abandonment by 15%, streamlining account onboarding with a +22% lift in sign-ups, and lifting PDP conversions by 3.5%.
               </p>
 
               {/* Quick credentials badges */}

@@ -153,10 +153,10 @@ export const BOT_KNOWLEDGE_BASE: BotQA[] = [
   },
   {
     id: 'clicks',
-    keywords: ['clicks', 'conversion', 'uplift', 'checkout', 'sdui', 'ecommerce', 'case study', 'results', 'stats'],
+    keywords: ['clicks', 'conversion', 'uplift', 'checkout', 'ecommerce', 'case study', 'results', 'stats', 'tcs'],
     question: 'What results did Deepak deliver on the Clicks project?',
-    answer: "On Clicks Group (South Africa's #1 retailer), I redesigned the mobile checkout from a sluggish 4-step reload gate into a server-driven single-page architecture. This delivered a verified +18.4% checkout conversion uplift, +32% guest checkout adoption, and reduced cart abandonment by 42%.",
-    highlightFact: '+18.4% conversion uplift on Clicks e-commerce',
+    answer: "On Clicks (a premier South African e-commerce retailer and TCS project, live at clicks.co.za), I served as Front End Developer using HTML5, CSS3, JavaScript, Bootstrap, jQuery, SAP Hybris, SmartEdit, Manual Testing, and Agile methodology. Key achievements: refactored checkout into a frictionless single-page UI (reducing cart abandonment by 15%), redesigned user registration/guest checkout (+22% sign-ups in month one), and re-architected PDP layouts to boost conversion rates by 3.5%.",
+    highlightFact: 'Clicks South Africa (clicks.co.za) • Front End Developer • -15% cart abandonment, +22% sign-ups',
     relatedStopId: 'project'
   },
   {

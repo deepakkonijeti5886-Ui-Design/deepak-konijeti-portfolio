@@ -140,8 +140,8 @@ export const SERVICES_LIST: ServiceItem[] = [
     title: 'E-COMMERCE CONVERSION OPTIMIZATION',
     description: 'Data-driven redesigns of checkout funnels, product display pages, and recommendation widgets that verifiably increase revenue and conversion rates.',
     capabilities: [
-      '+18.4% conversion uplift on Clicks e-commerce',
-      'Frictionless 1-click checkout flows',
+      '15% reduced cart abandonment on Clicks e-commerce',
+      'Single-page frictionless checkout UI',
       'Cart abandonment recovery UX',
       'Real-time inventory & dynamic pricing',
       'Performance budgets & Core Web Vitals'
@@ -177,6 +177,26 @@ export const PROJECTS_LIST: ProjectItem[] = [
   {
     id: '01',
     num: '01',
+    name: 'Clicks — South African E-Commerce Retailer',
+    titlePrimary: 'CLICKS',
+    titleItalic: 'retail',
+    titleSecondary: 'E-COMMERCE PLATFORM',
+    description: 'A premier South African e-commerce retailer web application built with scalable architecture, streamlined checkouts, optimized product discovery, and friction-free user account onboarding.',
+    role: 'Front End Developer',
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'jQuery', 'SAP Hybris', 'SmartEdit', 'Manual Testing', 'Agile Methodology'],
+    achievements: [
+      'Streamlined Checkout Funnel: Refactored a complex, multi-step checkout into a frictionless single-page checkout UI, reducing cart abandonment by 15% and boosting successful transactions.',
+      'Onboarding & Account Creation Fix: Redesigned the user registration and instant guest-checkout flow, resulting in an immediate 22% increase in sign-ups within the first month.',
+      'High-Converting Product Pages: Re-architected the Product Detail Page (PDP) layout to prioritize immediate calls-to-action (e.g., "Add to Cart", "Buy Now"), driving a 3.5% lift in total conversion rates.'
+    ],
+    image: '/assets/ecommerce.jpg',
+    live: 'https://clicks.co.za',
+    liveLabel: 'Visit Live Store',
+    metrics: '+15% Checkout Funnel'
+  },
+  {
+    id: '02',
+    num: '02',
     name: 'HabitFlow Pro — Habit Tracker',
     titlePrimary: 'HABIT',
     titleItalic: 'flow',
@@ -196,8 +216,8 @@ export const PROJECTS_LIST: ProjectItem[] = [
     metrics: '4.9 ★ App Rating'
   },
   {
-    id: '02',
-    num: '02',
+    id: '03',
+    num: '03',
     name: 'SpendTrack — Fintech Dashboard',
     titlePrimary: 'SPEND',
     titleItalic: 'track',
@@ -210,7 +230,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
       'Designed a recruiter-grade fintech dashboard with animated sparklines, budget velocity bars, and category breakdowns.',
       'Achieved sub-1s initial paint with optimized code splitting, lazy loading, and GPU-accelerated CSS animations.'
     ],
-    image: '/assets/ecommerce.jpg',
+    image: '/assets/expense.jpg',
     live: 'https://spendtrack-analytics.vercel.app',
     liveLabel: 'Open Live Demo',
     repo: 'https://github.com/deepakkonijeti5886-Ui-Design/spendtrack-analytics',
@@ -301,16 +321,17 @@ export const DESIGNER_INFO = {
 };
 
 export const CLICKS_CASE_STUDY = {
-  title: 'Clicks Group E-Commerce Platform',
-  role: 'Lead UI/UX Developer & Design Technologist',
-  company: 'Clicks Group (via TCS Retail Practice)',
-  timeline: '2022 - 2024',
-  overview: 'Redesigned checkout funnel yielding +18.4% checkout conversion uplift and 42% reduced cart abandonment.',
-  techStack: ['React 19', 'TypeScript', 'Tailwind CSS', 'Next.js', 'Redux Toolkit', 'Figma Tokens'],
+  title: 'Clicks - A South African E-commerce Retailer',
+  role: 'Front end developer',
+  company: 'Clicks (TCS Project)',
+  timeline: 'TCS Client Engagement',
+  live: 'https://clicks.co.za',
+  overview: 'A premier South African e-commerce retailer. Refactored checkout funnel, streamlined onboarding, and optimized product detail pages to boost conversion rates and user acquisition.',
+  techStack: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'jQuery', 'SAP Hybris', 'SmartEdit', 'Manual Testing', 'Agile Methodology'],
   results: [
-    { label: 'Checkout Conversion', value: '+18.4%' },
-    { label: 'Cart Abandonment Drop', value: '-42%' },
-    { label: 'Guest Adoption', value: '+32%' }
+    { label: 'Cart Abandonment Drop', value: '-15%' },
+    { label: 'Sign-Ups First Month', value: '+22%' },
+    { label: 'Conversion Lift (PDP)', value: '+3.5%' }
   ],
   painPoints: [
     '4-step legacy checkout with full page reloads',
