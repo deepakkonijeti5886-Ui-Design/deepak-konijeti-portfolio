@@ -201,21 +201,27 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
   const hasMovedRef = useRef<boolean>(false);
   const timelineIndexRef = useRef<number>(0);
 
+  const speechTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   // Client-side initialization
   useEffect(() => {
     setIsMounted(true);
-    const startX = Math.max(100, window.innerWidth - 280);
-    const startY = Math.max(120, window.innerHeight - 150);
+    const isMobile = window.innerWidth < 768;
+    const startX = isMobile 
+      ? Math.max(20, window.innerWidth - 120) 
+      : Math.max(100, window.innerWidth - 280);
+    const startY = isMobile
+      ? Math.max(80, window.innerHeight - 120)
+      : Math.max(120, window.innerHeight - 150);
     setPosX(startX);
     setPosY(startY);
 
-    // Initial greeting
+    // Initial pose (silent, comment box appears only when touched)
     const currentStep = AUTOMATED_TIMELINE[0];
     setPose(currentStep.pose);
     setSecondsRemaining(currentStep.durationSeconds);
     if (currentStep.dialogue) {
       setSpeechText(currentStep.dialogue);
-      setShowSpeech(true);
     }
   }, []);
 
@@ -224,13 +230,16 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
   }, [timelineIndex]);
 
   const applyPosePosition = (targetPose: ShimejiPose) => {
-    const floorY = Math.max(120, window.innerHeight - 150);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const floorY = isMobile 
+      ? Math.max(80, window.innerHeight - 120) 
+      : Math.max(120, window.innerHeight - 150);
     if (targetPose === 'climb') {
       // Anchor to the wall edge
-      setPosX(direction === 'left' ? 25 : window.innerWidth - 130);
+      setPosX(direction === 'left' ? (isMobile ? 10 : 25) : window.innerWidth - (isMobile ? 100 : 130));
       setPosY(floorY - 60);
     } else if (targetPose === 'sleep') {
-      setPosY(floorY + 15);
+      setPosY(floorY + (isMobile ? 8 : 15));
     } else if (targetPose === 'falling') {
       // If triggered from top, keep current high posY
       // launchFallingPhysics will take over
@@ -240,15 +249,21 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
   };
 
   const triggerDialogue = (currentPose: ShimejiPose, customText?: string) => {
-    if (customText) {
-      setSpeechText(customText);
-      setShowSpeech(true);
-      return;
-    }
-    const list = ALL_POSES[currentPose].jokes;
-    const joke = list[Math.floor(Math.random() * list.length)];
-    setSpeechText(joke);
+    const text = customText || (() => {
+      const list = ALL_POSES[currentPose].jokes;
+      return list[Math.floor(Math.random() * list.length)];
+    })();
+
+    setSpeechText(text);
     setShowSpeech(true);
+
+    if (speechTimeoutRef.current) {
+      clearTimeout(speechTimeoutRef.current);
+    }
+    // Auto-dismiss after 6 seconds so it never stays cluttered or permanently open
+    speechTimeoutRef.current = setTimeout(() => {
+      setShowSpeech(false);
+    }, 6000);
   };
 
   // Climbing movement loop (runs automatically when in 'climb' pose)
@@ -291,7 +306,10 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
           } else {
             applyPosePosition(nextStep.pose);
             setPose(nextStep.pose);
-            triggerDialogue(nextStep.pose, nextStep.dialogue);
+            // Prepare dialog text silently; user sees it when touching the character
+            if (nextStep.dialogue) {
+              setSpeechText(nextStep.dialogue);
+            }
           }
 
           return nextStep.durationSeconds;
@@ -430,78 +448,119 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
     }, 30);
   };
 
-  // Mouse Dragging & Throwing logic
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.button !== 0 || isFalling) return;
+  // Mouse & Touch Dragging & Throwing logic
+  const handleStart = (clientX: number, clientY: number) => {
+    if (isFalling) return;
     hasMovedRef.current = false;
     const now = performance.now();
     dragStartRef.current = {
-      x: e.clientX,
-      y: e.clientY,
+      x: clientX,
+      y: clientY,
       startPosX: posX,
       startPosY: posY
     };
     velocityRef.current = {
       vx: 0,
       vy: 0,
-      lastX: e.clientX,
-      lastY: e.clientY,
+      lastX: clientX,
+      lastY: clientY,
       lastTime: now
     };
+  };
 
-    const onMove = (moveEvent: MouseEvent) => {
-      const dist = Math.hypot(
-        moveEvent.clientX - dragStartRef.current.x,
-        moveEvent.clientY - dragStartRef.current.y
-      );
-      if (dist > 5) {
-        hasMovedRef.current = true;
-        setIsDragging(true);
-        setPose('dragged');
+  const handleMove = (clientX: number, clientY: number) => {
+    const dist = Math.hypot(
+      clientX - dragStartRef.current.x,
+      clientY - dragStartRef.current.y
+    );
+    if (dist > 5) {
+      hasMovedRef.current = true;
+      setIsDragging(true);
+      setPose('dragged');
 
-        const curTime = performance.now();
-        const dt = Math.max(1, curTime - velocityRef.current.lastTime);
-        velocityRef.current.vx = ((moveEvent.clientX - velocityRef.current.lastX) / dt) * 12;
-        velocityRef.current.vy = ((moveEvent.clientY - velocityRef.current.lastY) / dt) * 12;
-        velocityRef.current.lastX = moveEvent.clientX;
-        velocityRef.current.lastY = moveEvent.clientY;
-        velocityRef.current.lastTime = curTime;
+      const curTime = performance.now();
+      const dt = Math.max(1, curTime - velocityRef.current.lastTime);
+      velocityRef.current.vx = ((clientX - velocityRef.current.lastX) / dt) * 12;
+      velocityRef.current.vy = ((clientY - velocityRef.current.lastY) / dt) * 12;
+      velocityRef.current.lastX = clientX;
+      velocityRef.current.lastY = clientY;
+      velocityRef.current.lastTime = curTime;
 
-        const dx = moveEvent.clientX - dragStartRef.current.x;
-        const dy = moveEvent.clientY - dragStartRef.current.y;
-        setPosX(Math.max(10, Math.min(window.innerWidth - 120, dragStartRef.current.startPosX + dx)));
-        setPosY(Math.max(10, Math.min(window.innerHeight - 140, dragStartRef.current.startPosY + dy)));
-      }
-    };
+      const dx = clientX - dragStartRef.current.x;
+      const dy = clientY - dragStartRef.current.y;
+      const isMobile = window.innerWidth < 768;
+      const maxX = window.innerWidth - (isMobile ? 90 : 120);
+      const maxY = window.innerHeight - (isMobile ? 100 : 140);
+      setPosX(Math.max(10, Math.min(maxX, dragStartRef.current.startPosX + dx)));
+      setPosY(Math.max(10, Math.min(maxY, dragStartRef.current.startPosY + dy)));
+    }
+  };
 
-    const onUp = () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
+  const handleEnd = () => {
+    const isMobile = window.innerWidth < 768;
+    if (hasMovedRef.current) {
+      setIsDragging(false);
+      const floorY = isMobile
+        ? Math.max(80, window.innerHeight - 120)
+        : Math.max(120, window.innerHeight - 150);
 
-      if (hasMovedRef.current) {
-        setIsDragging(false);
-        const floorY = Math.max(150, window.innerHeight - 200);
-
-        // If lifted high or thrown, enter FALLING physics mode!
-        if (posY < floorY - 30 || Math.abs(velocityRef.current.vy) > 3) {
-          launchFallingPhysics(velocityRef.current.vy, velocityRef.current.vx);
-        } else {
-          // Put gently on floor
-          const currentIdx = timelineIndexRef.current;
-          const step = AUTOMATED_TIMELINE[currentIdx];
-          setSecondsRemaining(step.durationSeconds);
-          applyPosePosition(step.pose);
-          setPose(step.pose);
-          triggerDialogue(step.pose, step.dialogue);
-        }
+      // If lifted high or thrown, enter FALLING physics mode!
+      if (posY < floorY - 30 || Math.abs(velocityRef.current.vy) > 3) {
+        launchFallingPhysics(velocityRef.current.vy, velocityRef.current.vx);
       } else {
-        // Simple click advances to next pose immediately
-        cycleNextPose();
+        // Put gently on floor
+        const currentIdx = timelineIndexRef.current;
+        const step = AUTOMATED_TIMELINE[currentIdx];
+        setSecondsRemaining(step.durationSeconds);
+        applyPosePosition(step.pose);
+        setPose(step.pose);
+        triggerDialogue(step.pose, step.dialogue);
+      }
+    } else {
+      // Direct touch or click triggers the comment dialogue & cycles pose
+      const currentIdx = timelineIndexRef.current;
+      const step = AUTOMATED_TIMELINE[currentIdx];
+      triggerDialogue(step.pose, step.dialogue);
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0 || isFalling) return;
+    handleStart(e.clientX, e.clientY);
+
+    const onMouseMove = (me: MouseEvent) => {
+      handleMove(me.clientX, me.clientY);
+    };
+
+    const onMouseUp = () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+      handleEnd();
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (isFalling || e.touches.length === 0) return;
+    const touch = e.touches[0];
+    handleStart(touch.clientX, touch.clientY);
+
+    const onTouchMove = (te: TouchEvent) => {
+      if (te.touches.length > 0) {
+        handleMove(te.touches[0].clientX, te.touches[0].clientY);
       }
     };
 
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
+    const onTouchEnd = () => {
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+      handleEnd();
+    };
+
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd);
   };
 
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -570,41 +629,43 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
           top: `${posY}px`,
           zIndex: 9999,
           cursor: isDragging ? 'grabbing' : 'pointer',
+          touchAction: 'none',
           transition: (isDragging || isFalling) ? 'none' : 'top 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.3s ease-out'
         }}
         className="select-none flex flex-col items-center pointer-events-auto"
         onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
         onContextMenu={handleContextMenu}
       >
-        {/* SPEECH BUBBLE (Clean Dialogue with Dynamic Edge Adaptation) */}
+        {/* SPEECH BUBBLE (Clean Dialogue with Dynamic Edge & Mobile Adaptation) */}
         {showSpeech && (() => {
+          const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
           // Check if mini guy is near the left edge (< 220px) or right edge (> window.innerWidth - 320px)
-          const isNearLeft = typeof window !== 'undefined' && posX < 220;
-          const isNearRight = typeof window !== 'undefined' && posX > window.innerWidth - 320;
+          const isNearLeft = typeof window !== 'undefined' && posX < (isMobile ? 120 : 220);
+          const isNearRight = typeof window !== 'undefined' && posX > window.innerWidth - (isMobile ? 180 : 320);
 
           // Default: top-centered above Deepak
-          // If near left edge: shift speech bubble to the right of Deepak (vertically beside or right-anchored)
+          // If near left edge: shift speech bubble to the right of Deepak
           // If near right edge: shift speech bubble to the left of Deepak
-          let bubblePosClasses = "bottom-[135px] left-1/2 -translate-x-1/2";
+          let bubblePosClasses = "bottom-[115px] md:bottom-[135px] left-1/2 -translate-x-1/2";
           let pointerClasses = "-bottom-2 left-1/2 -translate-x-1/2 border-r border-b";
 
           if (isNearLeft) {
-            // Shift completely to the right side of Deepak with vertical centering or right placement
-            bubblePosClasses = "bottom-[20px] left-[105px] translate-x-0";
+            bubblePosClasses = "bottom-[15px] left-[75px] md:left-[105px] translate-x-0";
             pointerClasses = "top-1/2 -left-2 -translate-y-1/2 border-l border-b rotate-45";
           } else if (isNearRight) {
-            // Shift completely to the left side of Deepak
-            bubblePosClasses = "bottom-[20px] right-[105px] translate-x-0";
+            bubblePosClasses = "bottom-[15px] right-[75px] md:right-[105px] translate-x-0";
             pointerClasses = "top-1/2 -right-2 -translate-y-1/2 border-r border-t rotate-45";
           }
 
           return (
             <div
               onClick={(e) => e.stopPropagation()}
-              className={`absolute ${bubblePosClasses} w-64 sm:w-72 p-3.5 rounded-2xl bg-black/95 border border-cyan-400/50 backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.9),0_0_25px_rgba(6,182,212,0.35)] text-left z-50 animate-in fade-in zoom-in-95 duration-200`}
+              onTouchStart={(e) => e.stopPropagation()}
+              className={`absolute ${bubblePosClasses} w-[80vw] max-w-[270px] sm:max-w-none sm:w-72 p-3 sm:p-3.5 rounded-2xl bg-black/95 border border-cyan-400/50 backdrop-blur-xl shadow-[0_15px_35px_rgba(0,0,0,0.9),0_0_25px_rgba(6,182,212,0.35)] text-left z-50 animate-in fade-in zoom-in-95 duration-200`}
             >
               {/* Dynamic Speech Pointer */}
-              <div className={`absolute ${pointerClasses} w-3.5 h-3.5 bg-black/95 border-cyan-400/50 transform`} />
+              <div className={`absolute ${pointerClasses} w-3 h-3 md:w-3.5 md:h-3.5 bg-black/95 border-cyan-400/50 transform`} />
 
               <div className="flex items-center justify-between pb-1.5 mb-2 border-b border-white/10">
                 <span className="text-[10px] font-mono font-bold text-cyan-300 flex items-center gap-1.5 uppercase tracking-wider">
@@ -709,7 +770,7 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
             id="shimejiSpriteImg"
             src={currentConfig.sprite}
             alt={`Deepak Shimeji ${pose}`}
-            className="w-24 sm:w-28 h-auto drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)] filter pointer-events-none"
+            className="w-20 sm:w-28 h-auto drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)] filter pointer-events-none"
             draggable={false}
           />
         </div>
