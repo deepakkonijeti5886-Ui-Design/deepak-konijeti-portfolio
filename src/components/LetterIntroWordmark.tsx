@@ -104,7 +104,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
                                 if (titleBoxRef.current) {
                                   const isMobile = window.innerWidth < 768;
                                   gsap.to(titleBoxRef.current, {
-                                    top: isMobile ? '38%' : '83%',
+                                    top: isMobile ? '38%' : '84%',
                                     duration: 1.1,
                                     ease: 'power3.out',
                                     onComplete: () => {
@@ -193,12 +193,12 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
       {(phase === 'portfolio_in' || phase === 'portfolio_settled') && (
         <div
           ref={titleBoxRef}
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center w-full px-4 sm:px-8 md:px-12 max-w-[1400px] transition-all duration-700 pointer-events-none"
-          style={{ top: phase === 'portfolio_settled' ? '83%' : '50%' }}
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center w-full px-6 sm:px-12 md:px-16 max-w-7xl transition-all duration-700 pointer-events-none"
+          style={{ top: phase === 'portfolio_settled' ? '84%' : '50%' }}
         >
-          {/* Giant PORTFOLIO title docked at the lower boundary, scaled gracefully for laptops */}
-          <h1 className="w-full flex items-center justify-center md:justify-start text-[10vw] sm:text-[9vw] md:text-[5.5rem] lg:text-[6.8rem] xl:text-[8rem] 2xl:text-[9.2rem] font-extrabold tracking-[-0.04em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none overflow-visible">
-            <span className="inline-flex tracking-[-0.03em] whitespace-nowrap">
+          {/* Sized-down PORTFOLIO title: 100% visible with clean breathing room on all sides */}
+          <h1 className="w-full flex items-center justify-center text-[8.5vw] sm:text-[7.5vw] md:text-[4.2rem] lg:text-[5.2rem] xl:text-[6.4rem] 2xl:text-[7.5rem] font-extrabold tracking-[-0.03em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none">
+            <span className="inline-flex tracking-[-0.02em] whitespace-nowrap">
               {portfolioChars.map((char, i) => {
                 const isVisible = i < portfolioRevealed;
                 return (
