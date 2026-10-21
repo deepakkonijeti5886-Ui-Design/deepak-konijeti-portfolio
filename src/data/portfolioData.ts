@@ -42,7 +42,7 @@ export const PORTFOLIO_CONFIG = {
   url: 'https://ais-dev-lpgtb5mfh3yxhborxsc2xa-56582362853.asia-east1.run.app',
   storeUrl: '#components',
   socials: {
-    github: 'https://github.com/deepakkonijeti',
+    github: 'https://github.com/deepakkonijeti5886-Ui-Design',
     linkedin: 'https://linkedin.com/in/deepak-konijeti',
     dribbble: 'https://dribbble.com/deepakkonijeti',
   }
@@ -192,13 +192,13 @@ export const PROJECTS_LIST: ProjectItem[] = [
     image: '/assets/habitflow.jpg',
     live: '/projects/habitflow/',
     liveLabel: 'Open Live Demo',
-    repo: 'https://github.com/deepakkonijeti/habitflow-pro',
-    metrics: '4.9 \u2605 App Rating'
+    repo: 'https://github.com/deepakkonijeti5886-Ui-Design/habitflow-pro',
+    metrics: '4.9 ★ App Rating'
   },
   {
     id: '02',
     num: '02',
-    name: 'SpendTrack \u2014 Fintech Dashboard',
+    name: 'SpendTrack — Fintech Dashboard',
     titlePrimary: 'SPEND',
     titleItalic: 'track',
     titleSecondary: 'ANALYTICS PLATFORM',
@@ -213,7 +213,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     image: '/assets/ecommerce.jpg',
     live: '/projects/spendtrack/',
     liveLabel: 'Open Live Demo',
-    repo: 'https://github.com/deepakkonijeti/spendtrack-analytics',
+    repo: 'https://github.com/deepakkonijeti5886-Ui-Design/spendtrack-analytics',
     metrics: '$47K+ Tracked'
   }
 ];
