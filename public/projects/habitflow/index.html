@@ -1623,6 +1623,16 @@
       </div>
 
       <button type="button" class="btn-submit-habit" id="btnSubmitAuth">Sign In & Sync Habits</button>
+
+      <!-- 1-Click Mockup Logins -->
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);">
+        <div style="font-size: 0.65rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; text-align: center;">⚡ Instant Mockup Logins (Demo Profiles)</div>
+        <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+          <button type="button" id="demoHabitDeepak" style="padding: 5px 10px; border-radius: 999px; background: rgba(108, 92, 231, 0.15); border: 1px solid rgba(108, 92, 231, 0.3); color: var(--accent-light); font-size: 0.7rem; font-weight: 700; cursor: pointer;">Deepak (Level 7)</button>
+          <button type="button" id="demoHabitElena" style="padding: 5px 10px; border-radius: 999px; background: rgba(0, 210, 160, 0.15); border: 1px solid rgba(0, 210, 160, 0.3); color: var(--success); font-size: 0.7rem; font-weight: 700; cursor: pointer;">Elena (Level 9)</button>
+          <button type="button" id="demoHabitMarcus" style="padding: 5px 10px; border-radius: 999px; background: rgba(254, 202, 87, 0.15); border: 1px solid rgba(254, 202, 87, 0.3); color: var(--warning); font-size: 0.7rem; font-weight: 700; cursor: pointer;">Marcus (Level 12)</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2299,6 +2309,50 @@
         playBeep(659, 'sine', 0.15);
       });
     }
+
+    // 1-Click Mockup Logins (Demo Profiles)
+    document.getElementById('demoHabitDeepak')?.addEventListener('click', () => {
+      setHabitUser(DEFAULT_HABIT_USER);
+      closeAuthModal();
+      showToast('Logged in as Deepak Konijeti (Level 7 Master)');
+      playBeep(784, 'sine', 0.15);
+    });
+
+    document.getElementById('demoHabitElena')?.addEventListener('click', () => {
+      setHabitUser({
+        name: 'Elena Rostova',
+        nickname: 'Elena R.',
+        email: 'elena.rostova@gmail.com',
+        role: 'Biohacker & Product Lead',
+        bio: 'Tracking circadian rhythm, morning mindfulness, and zone 2 cardio.',
+        avatarInitials: 'ER',
+        level: 9,
+        levelTitle: 'FLOW ARCHITECT',
+        currentXP: 4520,
+        targetXP: 5000
+      });
+      closeAuthModal();
+      showToast('Logged in as Elena Rostova (Level 9)');
+      playBeep(784, 'sine', 0.15);
+    });
+
+    document.getElementById('demoHabitMarcus')?.addEventListener('click', () => {
+      setHabitUser({
+        name: 'Marcus Vance',
+        nickname: 'Marcus V.',
+        email: 'marcus.vance@icloud.com',
+        role: 'Endurance Athlete & Engineer',
+        bio: 'Building habits for athletic performance and deep focus coding sessions.',
+        avatarInitials: 'MV',
+        level: 12,
+        levelTitle: 'ZEN GRANDMASTER',
+        currentXP: 7890,
+        targetXP: 8000
+      });
+      closeAuthModal();
+      showToast('Logged in as Marcus Vance (Level 12)');
+      playBeep(784, 'sine', 0.15);
+    });
 
     // ==========================================
     // INITIALIZATION

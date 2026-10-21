@@ -491,7 +491,7 @@
       z-index: 1000; opacity: 0; pointer-events: none;
       transition: opacity 0.3s ease; padding: 16px;
     }
-    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal-overlay.open, .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
     .modal-box {
       width: 100%; max-width: 460px;
@@ -1096,6 +1096,16 @@
         </div>
 
         <button type="button" class="modal-btn-submit" id="btnSubmitAuth">Sign In to Dashboard</button>
+
+        <!-- 1-Click Mockup Logins -->
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);">
+          <div style="font-size: 0.65rem; color: var(--text-3); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; text-align: center;">⚡ Instant Mockup Logins (Demo Profiles)</div>
+          <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;">
+            <button type="button" class="mock-login-chip" id="demoUserDeepak" style="padding: 5px 10px; border-radius: 999px; background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--blue); font-size: 0.7rem; font-weight: 700; cursor: pointer;">Deepak (Lead Dev)</button>
+            <button type="button" class="mock-login-chip" id="demoUserAlex" style="padding: 5px 10px; border-radius: 999px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--green); font-size: 0.7rem; font-weight: 700; cursor: pointer;">Alex (CFO)</button>
+            <button type="button" class="mock-login-chip" id="demoUserSarah" style="padding: 5px 10px; border-radius: 999px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--orange); font-size: 0.7rem; font-weight: 700; cursor: pointer;">Sarah (Founder)</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1665,17 +1675,16 @@
 
     function syncUserProfileUI() {
       const u = getCurrentUser();
-      const nameEl = document.getElementById('userProfileName');
-      const emailEl = document.getElementById('userProfileEmail');
-      const roleEl = document.getElementById('userProfileRole');
-      const avatarEl = document.getElementById('userAvatarImg');
-      const menuAvatarEl = document.getElementById('menuUserAvatar');
+      const navAvatar = document.getElementById('navAvatar');
+      const navUserName = document.getElementById('navUserName');
+      const menuFullName = document.getElementById('menuUserFullName');
+      const menuEmail = document.getElementById('menuUserEmail');
 
-      if (nameEl) nameEl.textContent = u.name;
-      if (emailEl) emailEl.textContent = u.email;
-      if (roleEl) roleEl.textContent = u.role || 'Member';
-      if (avatarEl) avatarEl.src = u.avatar || DEFAULT_USER.avatar;
-      if (menuAvatarEl) menuAvatarEl.src = u.avatar || DEFAULT_USER.avatar;
+      const initials = (u.name || 'Deepak').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+      if (navAvatar) navAvatar.textContent = initials;
+      if (navUserName) navUserName.textContent = (u.name || 'Deepak').split(' ')[0];
+      if (menuFullName) menuFullName.textContent = u.name;
+      if (menuEmail) menuEmail.textContent = u.email;
     }
 
     // Auth Modal handling
@@ -1709,16 +1718,21 @@
         if (authNameGroup) authNameGroup.style.display = 'block';
         if (btnSubmitAuth) btnSubmitAuth.textContent = 'Create Account & Continue';
       }
-      if (authModal) authModal.classList.add('active');
+      if (authModal) authModal.classList.add('open', 'active');
     }
 
     function closeAuthModal() {
-      if (authModal) authModal.classList.remove('active');
+      if (authModal) authModal.classList.remove('open', 'active');
     }
 
     if (authTabLogin) authTabLogin.addEventListener('click', () => openAuthModal('login'));
     if (authTabSignup) authTabSignup.addEventListener('click', () => openAuthModal('signup'));
     if (closeAuthBtn) closeAuthBtn.addEventListener('click', closeAuthModal);
+    if (authModal) {
+      authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) closeAuthModal();
+      });
+    }
 
     // Quick OAuth buttons simulation
     const btnGoogleAuth = document.getElementById('btnGoogleAuth');
@@ -1776,19 +1790,50 @@
       });
     }
 
+    // 1-Click Mockup Login presets
+    document.getElementById('demoUserDeepak')?.addEventListener('click', () => {
+      setCurrentUser(DEFAULT_USER);
+      closeAuthModal();
+      showToast('Logged in as Deepak Konijeti (Staff Architect)', '💎');
+    });
+
+    document.getElementById('demoUserAlex')?.addEventListener('click', () => {
+      setCurrentUser({
+        name: 'Alex Rivera',
+        email: 'alex.cfo@spendtrack.io',
+        role: 'Chief Financial Officer',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+        tier: 'Enterprise Executive'
+      });
+      closeAuthModal();
+      showToast('Logged in as Alex Rivera (CFO)', '📊');
+    });
+
+    document.getElementById('demoUserSarah')?.addEventListener('click', () => {
+      setCurrentUser({
+        name: 'Sarah Chen',
+        email: 'sarah.founder@spendtrack.io',
+        role: 'Managing Partner & Founder',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
+        tier: 'Founding Partner'
+      });
+      closeAuthModal();
+      showToast('Logged in as Sarah Chen (Founder)', '🚀');
+    });
+
     // Profile Dropdown Toggle
-    const userProfilePill = document.getElementById('userProfilePill');
+    const userPillBtn = document.getElementById('userPillBtn');
     const userMenuDropdown = document.getElementById('userMenuDropdown');
 
-    if (userProfilePill && userMenuDropdown) {
-      userProfilePill.addEventListener('click', (e) => {
+    if (userPillBtn && userMenuDropdown) {
+      userPillBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        userMenuDropdown.classList.toggle('active');
+        userMenuDropdown.classList.toggle('show');
       });
 
       document.addEventListener('click', (e) => {
-        if (!userMenuDropdown.contains(e.target) && !userProfilePill.contains(e.target)) {
-          userMenuDropdown.classList.remove('active');
+        if (!userMenuDropdown.contains(e.target) && !userPillBtn.contains(e.target)) {
+          userMenuDropdown.classList.remove('show');
         }
       });
     }
@@ -1799,16 +1844,17 @@
 
     if (menuSwitchAccount) {
       menuSwitchAccount.addEventListener('click', () => {
-        if (userMenuDropdown) userMenuDropdown.classList.remove('active');
+        if (userMenuDropdown) userMenuDropdown.classList.remove('show');
         openAuthModal('login');
       });
     }
 
     if (menuClearData) {
       menuClearData.addEventListener('click', () => {
-        if (userMenuDropdown) userMenuDropdown.classList.remove('active');
+        if (userMenuDropdown) userMenuDropdown.classList.remove('show');
         if (confirm('Reset ledger and restore factory seed transactions?')) {
           localStorage.removeItem(DB_KEY_TX);
+          transactions = JSON.parse(JSON.stringify(DEFAULT_TRANSACTIONS));
           recalculateDashboard();
           showToast('Ledger reset to baseline template', '🔄');
         }
@@ -1817,7 +1863,7 @@
 
     if (menuLogout) {
       menuLogout.addEventListener('click', () => {
-        if (userMenuDropdown) userMenuDropdown.classList.remove('active');
+        if (userMenuDropdown) userMenuDropdown.classList.remove('show');
         setCurrentUser({
           name: 'Guest User',
           email: 'guest@spendtrack.io',
@@ -1826,7 +1872,7 @@
           tier: 'Free Preview'
         });
         showToast('Logged out to Guest Mode', '👋');
-        setTimeout(() => openAuthModal('login'), 600);
+        setTimeout(() => openAuthModal('login'), 400);
       });
     }
 
@@ -1834,10 +1880,10 @@
     // NAVIGATION TAB SWITCHER (DASHBOARD, ANALYTICS, BUDGETS, ACCOUNTS)
     // ============================================================
     const tabMap = {
-      'navTabDashboard': 'viewDashboard',
-      'navTabAnalytics': 'viewAnalytics',
-      'navTabBudgets': 'viewBudgets',
-      'navTabAccounts': 'viewAccounts'
+      'dashboard': 'viewDashboard',
+      'analytics': 'viewAnalytics',
+      'budgets': 'viewBudgets',
+      'accounts': 'viewAccounts'
     };
 
     function switchView(tabKey) {
@@ -1848,22 +1894,25 @@
       const activeSec = document.getElementById(targetViewId);
       if (activeSec) activeSec.classList.add('active');
 
-      document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
-      const activeNav = document.getElementById(tabKey);
-      if (activeNav) activeNav.classList.add('active');
+      document.querySelectorAll('.nav-links li').forEach(li => {
+        if (li.getAttribute('data-view') === tabKey) {
+          li.classList.add('active');
+        } else {
+          li.classList.remove('active');
+        }
+      });
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    Object.keys(tabMap).forEach(tabKey => {
-      const el = document.getElementById(tabKey);
-      if (el) {
-        el.addEventListener('click', () => {
-          switchView(tabKey);
-          const name = el.textContent.trim();
-          showToast(`Switched to ${name}`, '⚡');
-        });
-      }
+    document.querySelectorAll('.nav-links li').forEach(li => {
+      li.addEventListener('click', () => {
+        const viewKey = li.getAttribute('data-view');
+        if (viewKey) {
+          switchView(viewKey);
+          showToast(`Switched to ${li.textContent.trim()}`, '⚡');
+        }
+      });
     });
 
     // ============================================================
