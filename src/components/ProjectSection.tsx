@@ -12,9 +12,9 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ onOpenCaseStudy 
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20 md:mb-28">
           <div>
-            <h2 className="text-5xl sm:text-6xl md:text-8xl font-black tracking-tighter uppercase select-none">
+            <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-[-0.05em] uppercase select-none font-display">
               <span className="text-metallic">SELECTED</span>{' '}
-              <span className="font-light italic text-gray-400 font-serif lowercase">work</span>
+              <span className="font-light italic text-gray-300 font-editorial lowercase">work</span>
             </h2>
           </div>
 

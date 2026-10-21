@@ -12,7 +12,7 @@ export const AboutSection: React.FC = () => {
             <span className="text-[11px] font-mono font-bold tracking-[0.25em] text-gray-400 uppercase mb-4">
               ABOUT ME
             </span>
-            <h2 className="text-7xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-none text-metallic uppercase select-none">
+            <h2 className="text-7xl sm:text-8xl md:text-9xl font-extrabold tracking-[-0.05em] leading-none text-metallic uppercase select-none font-display">
               Intro
             </h2>
           </div>

@@ -197,7 +197,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
           style={{ top: phase === 'portfolio_settled' ? '76%' : '50%' }}
         >
           {/* Giant PORTFOLIO title docked at the lower boundary */}
-          <h1 className="text-[14vw] md:text-[8rem] lg:text-[9.5rem] font-black tracking-tighter drop-shadow-2xl leading-none uppercase text-metallic font-sans">
+          <h1 className="text-[14vw] md:text-[8rem] lg:text-[9.5rem] font-extrabold tracking-[-0.05em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none">
             <span className="inline-flex tracking-[-0.04em]">
               {portfolioChars.map((char, i) => {
                 const isVisible = i < portfolioRevealed;
@@ -225,7 +225,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
             <div className="flex items-center gap-2">
               <p className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white">
                 UI Developer{' '}
-                <span className="font-light italic text-gray-400 font-serif lowercase">
+                <span className="font-light italic text-gray-300 font-editorial text-2xl md:text-3xl lg:text-4xl">
                   & Frontend Engineer (React / TypeScript / Next.js)
                 </span>
               </p>
