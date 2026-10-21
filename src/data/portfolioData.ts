@@ -39,7 +39,7 @@ export const PORTFOLIO_CONFIG = {
   whatsapp: '919533095630',
   location: 'Bengaluru, India',
   availability: 'Immediate Joiner • Open to Global & Remote Opportunities',
-  url: 'https://ais-dev-lpgtb5mfh3yxhborxsc2xa-56582362853.asia-east1.run.app',
+  url: 'https://deepak-konijeti-portfolio.vercel.app',
   storeUrl: '#components',
   socials: {
     github: 'https://github.com/deepakkonijeti5886-Ui-Design',
@@ -190,7 +190,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
       'Designed an award-winning mobile-first dark UI with glassmorphism, ambient gradients, and micro-interaction polish.'
     ],
     image: '/assets/habitflow.jpg',
-    live: '/projects/habitflow/',
+    live: 'https://habitflow-pro-virid.vercel.app',
     liveLabel: 'Open Live Demo',
     repo: 'https://github.com/deepakkonijeti5886-Ui-Design/habitflow-pro',
     metrics: '4.9 ★ App Rating'
@@ -211,7 +211,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
       'Achieved sub-1s initial paint with optimized code splitting, lazy loading, and GPU-accelerated CSS animations.'
     ],
     image: '/assets/ecommerce.jpg',
-    live: '/projects/spendtrack/',
+    live: 'https://spendtrack-analytics.vercel.app',
     liveLabel: 'Open Live Demo',
     repo: 'https://github.com/deepakkonijeti5886-Ui-Design/spendtrack-analytics',
     metrics: '$47K+ Tracked'
