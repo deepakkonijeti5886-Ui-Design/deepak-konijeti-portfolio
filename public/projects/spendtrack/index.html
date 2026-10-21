@@ -742,8 +742,137 @@
     .user-menu-item:hover {
       background: rgba(255, 255, 255, 0.05); color: #fff;
     }
-    .user-menu-item.danger:hover {
-      background: var(--red-dim); color: var(--red);
+    /* Landing Page Section Styles */
+    .landing-hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 40px 0 60px;
+    }
+    @media (max-width: 900px) {
+      .landing-hero-grid { grid-template-columns: 1fr; text-align: center; }
+    }
+    .landing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--blue);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .landing-title {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+    }
+    .landing-title span {
+      background: linear-gradient(135deg, #fff, var(--blue), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .landing-lead {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 30px;
+      max-width: 520px;
+    }
+    @media (max-width: 900px) { .landing-lead { margin: 0 auto 30px; } }
+    .landing-cta-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 900px) { .landing-cta-group { justify-content: center; } }
+    .btn-landing-primary {
+      padding: 14px 28px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--blue-glow);
+      transition: all 0.25s;
+    }
+    .btn-landing-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+    }
+    .btn-landing-secondary {
+      padding: 14px 24px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-landing-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-hover);
+    }
+    .landing-hero-img-wrap {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(59, 130, 246, 0.25);
+    }
+    .landing-hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .landing-hero-img-wrap:hover .landing-hero-img {
+      transform: scale(1.03);
+    }
+
+    /* Landing Feature Cards Bento */
+    .landing-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 40px 0 70px;
+    }
+    @media (max-width: 800px) {
+      .landing-features-grid { grid-template-columns: 1fr; }
+    }
+    .landing-feat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      transition: all 0.3s;
+    }
+    .landing-feat-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+    .feat-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
     }
   </style>
 </head>
@@ -752,12 +881,6 @@
   <div class="noise"></div>
 
   <div class="dashboard">
-    <!-- Back to Portfolio -->
-    <a href="https://deepak-konijeti-portfolio.vercel.app/#project" class="back-nav">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
-      <span>Back to Portfolio</span>
-    </a>
-
     <!-- Top Nav -->
     <nav class="top-nav">
       <div class="logo">
@@ -765,7 +888,8 @@
         <div class="logo-text">Spend<span>Track</span></div>
       </div>
       <ul class="nav-links">
-        <li class="active" data-view="dashboard">Dashboard</li>
+        <li data-view="landing">Overview</li>
+        <li class="active" data-view="dashboard">App Dashboard</li>
         <li data-view="analytics">Analytics</li>
         <li data-view="budgets">Budgets</li>
         <li data-view="accounts">Accounts</li>
@@ -814,6 +938,59 @@
         </div>
       </div>
     </nav>
+
+    <!-- TAB 0: LANDING PAGE (SaaS Overview) -->
+    <div class="tab-section" id="viewLanding">
+      <div class="landing-hero-grid">
+        <div>
+          <div class="landing-badge">✨ NEXT-GEN WEALTH ENGINE v3.4</div>
+          <h1 class="landing-title">Automate your global cash flow with <span>holographic precision</span>.</h1>
+          <p class="landing-lead">
+            The enterprise ledger platform built for technical founders, operators, and cross-border teams. Track multi-currency treasury, burn rates, and predictive runway with real-time reactive persistence.
+          </p>
+          <div class="landing-cta-group">
+            <button type="button" class="btn-landing-primary" id="btnLandingLaunchApp">Launch Live App 🚀</button>
+            <button type="button" class="btn-landing-secondary" id="btnLandingMockLogin">1-Click Demo Login 👤</button>
+          </div>
+          <div style="display: flex; gap: 24px; margin-top: 36px; font-size: 0.8rem; color: var(--text-2);">
+            <div><strong style="color: #fff; font-size: 1.1rem; display: block;">$240M+</strong> Simulated Volume</div>
+            <div><strong style="color: #fff; font-size: 1.1rem; display: block;">99.99%</strong> State Fidelity</div>
+            <div><strong style="color: #fff; font-size: 1.1rem; display: block;">0.0ms</strong> Local Latency</div>
+          </div>
+        </div>
+
+        <div class="landing-hero-img-wrap">
+          <img src="assets/landing_3d_hero.jpg" alt="SpendTrack 3D Dashboard Mockup" class="landing-hero-img" />
+        </div>
+      </div>
+
+      <!-- Feature Grid Bento -->
+      <div class="landing-features-grid">
+        <div class="landing-feat-card">
+          <div class="feat-icon-box" style="background: rgba(59, 130, 246, 0.15); color: var(--blue);">⚡</div>
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Multi-Currency FX Engine</h3>
+          <p style="font-size: 0.82rem; color: var(--text-2); line-height: 1.5;">
+            Dynamic currency switching between USD, EUR, GBP, and INR with automated spot exchange rates and normalized reporting.
+          </p>
+        </div>
+
+        <div class="landing-feat-card">
+          <div class="feat-icon-box" style="background: rgba(16, 185, 129, 0.15); color: var(--green);">📊</div>
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Predictive Runway Forecasts</h3>
+          <p style="font-size: 0.82rem; color: var(--text-2); line-height: 1.5;">
+            Monte Carlo simulated burn projections, seasonal anomaly detection, and automated runway alerts computed directly in the client.
+          </p>
+        </div>
+
+        <div class="landing-feat-card">
+          <div class="feat-icon-box" style="background: rgba(245, 158, 11, 0.15); color: var(--orange);">🛡️</div>
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 8px;">Multi-Account Vault Sync</h3>
+          <p style="font-size: 0.82rem; color: var(--text-2); line-height: 1.5;">
+            Unified ledger across Chase Corporate, SVB High-Yield Treasury, and Stripe Commerce Webhooks with zero-downtime mock storage.
+          </p>
+        </div>
+      </div>
+    </div>
 
     <!-- TAB 1: DASHBOARD (Active View) -->
     <div class="tab-section active" id="viewDashboard">
@@ -1877,9 +2054,10 @@
     }
 
     // ============================================================
-    // NAVIGATION TAB SWITCHER (DASHBOARD, ANALYTICS, BUDGETS, ACCOUNTS)
+    // NAVIGATION TAB SWITCHER (OVERVIEW, DASHBOARD, ANALYTICS, BUDGETS, ACCOUNTS)
     // ============================================================
     const tabMap = {
+      'landing': 'viewLanding',
       'dashboard': 'viewDashboard',
       'analytics': 'viewAnalytics',
       'budgets': 'viewBudgets',
@@ -1904,6 +2082,16 @@
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Landing CTA bindings
+    document.getElementById('btnLandingLaunchApp')?.addEventListener('click', () => {
+      switchView('dashboard');
+      showToast('Welcome to SpendTrack App Dashboard', '🚀');
+    });
+
+    document.getElementById('btnLandingMockLogin')?.addEventListener('click', () => {
+      openAuthModal('login');
+    });
 
     document.querySelectorAll('.nav-links li').forEach(li => {
       li.addEventListener('click', () => {

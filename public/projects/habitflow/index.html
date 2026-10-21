@@ -71,38 +71,151 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
 
-    /* Layout Shell */
-    .app-shell {
-      position: relative;
-      z-index: 10;
-      max-width: 500px;
-      margin: 0 auto;
-      min-height: 100vh;
-      padding: 0 16px;
+    /* Layout Shell with Mode Switch (Mobile / Laptop) */
+    .viewport-mode-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 16px 4px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
-
-    /* Back to Portfolio Pill */
-    .back-nav {
+    .view-mode-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-top: 14px;
-      padding: 6px 14px;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       border-radius: 999px;
-      color: var(--text-secondary);
+      padding: 5px 12px;
       font-size: 0.72rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      backdrop-filter: blur(8px);
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
     }
-    .back-nav:hover {
+    .view-mode-pill.active {
+      background: linear-gradient(135deg, var(--accent), var(--pink));
       color: #fff;
-      border-color: var(--accent-light);
+      border-color: transparent;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .app-shell {
+      position: relative;
+      z-index: 10;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 0 16px;
+      transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Laptop Wide Viewport Mode */
+    body.mode-laptop .app-shell {
+      max-width: 1040px;
+    }
+    body.mode-laptop .weekly-ring-section {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    body.mode-laptop .streak-hero {
+      padding: 36px 28px;
+    }
+
+    /* HabitFlow Landing Page Styles */
+    .hf-landing-hero {
+      padding: 30px 0 50px;
+      text-align: center;
+    }
+    .hf-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
       background: rgba(108, 92, 231, 0.15);
-      transform: translateX(-2px);
+      border: 1px solid rgba(108, 92, 231, 0.3);
+      color: var(--accent-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hf-landing-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hf-landing-title span {
+      background: linear-gradient(135deg, #fff, var(--accent-light), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hf-landing-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+    .hf-cta-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .hf-btn-cta {
+      padding: 12px 24px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--pink));
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 18px var(--accent-glow);
+      transition: all 0.25s;
+    }
+    .hf-btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(108, 92, 231, 0.5);
+    }
+    .hf-btn-demo {
+      padding: 12px 20px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .hf-btn-demo:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .hf-landing-card-img {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(108, 92, 231, 0.25);
+      margin-bottom: 32px;
+    }
+    .hf-landing-card-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .hf-landing-card-img:hover img {
+      transform: scale(1.02);
     }
 
     /* Top Bar */
@@ -1235,13 +1348,18 @@
     <span id="toastMsg">Habit checked!</span>
   </div>
 
-  <div class="app-shell">
-    <!-- Back to Portfolio Pill -->
-    <a href="/" class="back-nav" id="backToPortfolio">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      <span>Back to Portfolio</span>
-    </a>
+  <div class="viewport-mode-bar">
+    <div class="view-mode-pill active" id="btnModeMobile">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
+      <span>Mobile Frame</span>
+    </div>
+    <div class="view-mode-pill" id="btnModeLaptop">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+      <span>Laptop Workspace</span>
+    </div>
+  </div>
 
+  <div class="app-shell">
     <!-- Top Bar -->
     <div class="top-bar">
       <div class="top-bar-left">
@@ -1257,6 +1375,25 @@
           <span class="badge" id="notifBadge"></span>
         </button>
         <div class="avatar" id="avatarBtn" title="Deepak Profile">DK</div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 0: LANDING PAGE ==================== -->
+    <div class="tab-view" id="viewLanding">
+      <div class="hf-landing-hero">
+        <div class="hf-badge">⚡ ATOMIC HABIT OS v2.4</div>
+        <h1 class="hf-landing-title">Master your daily routines with <span>cosmic flow</span>.</h1>
+        <p class="hf-landing-desc">
+          The gamified habit tracking system with Web Audio haptic feedback, 31-day visual heatmaps, and streak multipliers engineered for peak human performance.
+        </p>
+        <div class="hf-cta-row">
+          <button type="button" class="hf-btn-cta" id="btnHfLaunchApp">Open Daily Tracker 🚀</button>
+          <button type="button" class="hf-btn-demo" id="btnHfOpenLogin">1-Click Demo Login 👤</button>
+        </div>
+
+        <div class="hf-landing-card-img">
+          <img src="assets/landing_3d_hero.jpg" alt="HabitFlow 3D Mobile Showcase" />
+        </div>
       </div>
     </div>
 
@@ -1503,6 +1640,10 @@
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
     <div class="bottom-nav-inner">
+      <div class="nav-item" data-tab="landing" id="navLanding">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6Z"/></svg>
+        <span>Overview</span>
+      </div>
       <div class="nav-item active" data-tab="home" id="navHome">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Home</span>
@@ -1956,10 +2097,35 @@
     });
 
     // ==========================================
+    // VIEWPORT RESOLUTION SWITCHER (MOBILE / LAPTOP)
+    // ==========================================
+    const btnModeMobile = document.getElementById('btnModeMobile');
+    const btnModeLaptop = document.getElementById('btnModeLaptop');
+
+    if (btnModeMobile && btnModeLaptop) {
+      btnModeMobile.addEventListener('click', () => {
+        document.body.classList.remove('mode-laptop');
+        btnModeMobile.classList.add('active');
+        btnModeLaptop.classList.remove('active');
+        showToast('📱 Switched to Mobile Frame Resolution');
+        playBeep(520, 'sine', 0.08);
+      });
+
+      btnModeLaptop.addEventListener('click', () => {
+        document.body.classList.add('mode-laptop');
+        btnModeLaptop.classList.add('active');
+        btnModeMobile.classList.remove('active');
+        showToast('💻 Switched to Laptop Workspace Resolution');
+        playBeep(620, 'sine', 0.08);
+      });
+    }
+
+    // ==========================================
     // NAVIGATION TABS SWITCHER
     // ==========================================
     const navItems = document.querySelectorAll('.nav-item');
     const views = {
+      landing: document.getElementById('viewLanding'),
       home: document.getElementById('viewHome'),
       calendar: document.getElementById('viewCalendar'),
       stats: document.getElementById('viewStats'),
@@ -1978,6 +2144,16 @@
       playBeep(600, 'sine', 0.06);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Landing CTA button handlers
+    document.getElementById('btnHfLaunchApp')?.addEventListener('click', () => {
+      switchTab('home');
+      showToast('🚀 Welcome to HabitFlow Daily Tracker');
+    });
+
+    document.getElementById('btnHfOpenLogin')?.addEventListener('click', () => {
+      openAuthModal('login');
+    });
 
     navItems.forEach(item => {
       item.addEventListener('click', () => {
