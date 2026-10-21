@@ -44,13 +44,13 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
     let isCancelled = false;
     const timeouts: NodeJS.Timeout[] = [];
 
-    // Stage 0: Blank screen for 450ms
+    // Stage 0: Blank screen for 300ms
     timeouts.push(
       setTimeout(() => {
         if (isCancelled) return;
         setPhase('deepak_letters');
 
-        // Stage 1: Reveal D - E - E - P - A - K one by one (180ms each)
+        // Stage 1: Reveal D - E - E - P - A - K one by one (120ms each)
         let count = 0;
         const letterInterval = setInterval(() => {
           if (isCancelled) {
@@ -63,13 +63,13 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
           if (count >= deepakChars.length) {
             clearInterval(letterInterval);
 
-            // Stage 2: Hold DEEPAK for 800ms
+            // Stage 2: Hold DEEPAK briefly for 500ms
             timeouts.push(
               setTimeout(() => {
                 if (isCancelled) return;
                 setPhase('deepak_hold');
 
-                // Stage 3: DEEPAK dissolves & disappears
+                // Stage 3: DEEPAK dissolves & disappears smoothly
                 timeouts.push(
                   setTimeout(() => {
                     if (isCancelled) return;
@@ -104,9 +104,9 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
                                 if (titleBoxRef.current) {
                                   const isMobile = window.innerWidth < 768;
                                   gsap.to(titleBoxRef.current, {
-                                    top: isMobile ? '38%' : '76%',
-                                    duration: 1.4,
-                                    ease: 'power3.inOut',
+                                    top: isMobile ? '38%' : '83%',
+                                    duration: 1.1,
+                                    ease: 'power3.out',
                                     onComplete: () => {
                                       onAnimationComplete?.();
                                     }
@@ -116,23 +116,23 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
                                 if (subtitleRef.current && actionsRef.current) {
                                   gsap.fromTo(
                                     [subtitleRef.current, actionsRef.current],
-                                    { y: 35, opacity: 0 },
-                                    { y: 0, opacity: 1, duration: 1.0, delay: 0.3, ease: 'power3.out' }
+                                    { y: 25, opacity: 0 },
+                                    { y: 0, opacity: 1, duration: 0.8, delay: 0.15, ease: 'power3.out' }
                                   );
                                 }
-                              }, 500)
+                              }, 350)
                             );
                           }
-                        }, 90);
-                      }, 700)
+                        }, 75);
+                      }, 500)
                     );
-                  }, 700)
+                  }, 500)
                 );
-              }, 600)
+              }, 450)
             );
           }
-        }, 160);
-      }, 450)
+        }, 120);
+      }, 300)
     );
 
     return () => {
@@ -153,26 +153,26 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
       {/* STAGE 1 & 2: DEEPAK LETTERS CINEMATIC REVEAL & DISSOLVE */}
       {(phase === 'deepak_letters' || phase === 'deepak_hold' || phase === 'deepak_fadeout') && (
         <div
-          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center text-center w-full px-4 transition-all duration-700 ease-out ${
-            phase === 'deepak_fadeout' ? 'opacity-0 scale-110 blur-md' : 'opacity-100 scale-100 blur-0'
+          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center text-center w-full px-4 transition-all duration-500 ease-out ${
+            phase === 'deepak_fadeout' ? 'opacity-0 scale-105 blur-md' : 'opacity-100 scale-100 blur-0'
           }`}
         >
-          <span className="text-xs md:text-sm font-mono uppercase tracking-[0.35em] text-emerald-400/80 mb-4 animate-pulse">
+          <span className="text-xs md:text-sm font-mono uppercase tracking-[0.35em] text-emerald-400/80 mb-3 animate-pulse">
             Introducing
           </span>
-          <h1 className="text-[18vw] md:text-[13rem] lg:text-[16rem] font-black tracking-tight leading-none uppercase font-sans flex items-center justify-center">
+          <h1 className="text-[17vw] md:text-[11rem] lg:text-[14rem] font-black tracking-tight leading-none uppercase font-sans flex items-center justify-center">
             {deepakChars.map((char, i) => {
               const isVisible = i < deepakRevealed;
               return (
                 <span
                   key={i}
                   style={{
-                    transitionDelay: `${i * 30}ms`
+                    transitionDelay: `${i * 25}ms`
                   }}
-                  className={`inline-block transition-all duration-500 transform ${
+                  className={`inline-block transition-all duration-400 transform ${
                     isVisible
                       ? 'opacity-100 translate-y-0 scale-100 filter drop-shadow-[0_0_35px_rgba(255,255,255,0.4)] text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-500'
-                      : 'opacity-0 translate-y-12 scale-75'
+                      : 'opacity-0 translate-y-10 scale-75'
                   }`}
                 >
                   {char}
@@ -193,12 +193,12 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
       {(phase === 'portfolio_in' || phase === 'portfolio_settled') && (
         <div
           ref={titleBoxRef}
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center md:items-start w-full px-6 md:px-16 max-w-7xl transition-all duration-700 pointer-events-none"
-          style={{ top: phase === 'portfolio_settled' ? '76%' : '50%' }}
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center md:items-start w-full px-6 md:px-12 lg:px-16 max-w-7xl transition-all duration-700 pointer-events-none"
+          style={{ top: phase === 'portfolio_settled' ? '83%' : '50%' }}
         >
-          {/* Giant PORTFOLIO title docked at the lower boundary */}
-          <h1 className="text-[14vw] md:text-[8rem] lg:text-[9.5rem] font-extrabold tracking-[-0.05em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none">
-            <span className="inline-flex tracking-[-0.04em]">
+          {/* Giant PORTFOLIO title docked at the lower boundary, scaled gracefully for laptops */}
+          <h1 className="w-full text-center md:text-left text-[11vw] sm:text-[9.5vw] md:text-[6.2rem] lg:text-[7.4rem] xl:text-[8.5rem] font-extrabold tracking-[-0.04em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none">
+            <span className="inline-flex tracking-[-0.03em] whitespace-nowrap">
               {portfolioChars.map((char, i) => {
                 const isVisible = i < portfolioRevealed;
                 return (
@@ -220,12 +220,12 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
           {/* Sub-hero info row */}
           <div
             ref={subtitleRef}
-            className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 mt-3 md:mt-4 opacity-0 pointer-events-auto"
+            className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 mt-2 md:mt-3 opacity-0 pointer-events-auto"
           >
             <div className="flex items-center gap-2">
-              <p className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white">
+              <p className="text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-white">
                 UI Developer{' '}
-                <span className="font-light italic text-gray-300 font-editorial text-2xl md:text-3xl lg:text-4xl">
+                <span className="font-light italic text-gray-300 font-editorial text-xl md:text-2xl lg:text-3xl">
                   & Frontend Engineer (React / TypeScript / Next.js)
                 </span>
               </p>
@@ -235,7 +235,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
               <button
                 onClick={onScrollToAbout}
                 aria-label="Scroll to About section"
-                className="w-12 h-12 rounded-full border border-white/20 bg-black/60 hover:bg-white/10 text-white flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer"
+                className="w-11 h-11 md:w-12 md:h-12 rounded-full border border-white/20 bg-black/60 hover:bg-white/10 text-white flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer backdrop-blur-sm"
               >
                 <svg
                   className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-y-0.5"
@@ -253,7 +253,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
 
               <button
                 onClick={onScrollToContact}
-                className="px-6 py-3 rounded-full border border-white/20 bg-black/60 hover:bg-white text-white hover:text-black text-sm font-semibold tracking-wide transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-sm shadow-lg"
+                className="px-5 py-2.5 md:px-6 md:py-3 rounded-full border border-white/20 bg-black/60 hover:bg-white text-white hover:text-black text-xs md:text-sm font-semibold tracking-wide transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer backdrop-blur-sm shadow-lg"
               >
                 Contact
               </button>

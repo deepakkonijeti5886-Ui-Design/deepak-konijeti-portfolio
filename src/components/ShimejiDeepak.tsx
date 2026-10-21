@@ -443,7 +443,10 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
         const nextStep = AUTOMATED_TIMELINE[nextIdx];
         setPose(nextStep.pose);
         setSecondsRemaining(nextStep.durationSeconds);
-        triggerDialogue(nextStep.pose, `*Oof!* Landed safely on two feet! Back to work! ✨`);
+        // Silent landing: do not pop comment bubble automatically
+        if (nextStep.dialogue) {
+          setSpeechText(nextStep.dialogue);
+        }
       }
     }, 30);
   };
@@ -508,13 +511,15 @@ export const ShimejiDeepak: React.FC<ShimejiDeepakProps> = ({ onContactClick }) 
       if (posY < floorY - 30 || Math.abs(velocityRef.current.vy) > 3) {
         launchFallingPhysics(velocityRef.current.vy, velocityRef.current.vx);
       } else {
-        // Put gently on floor
+        // Put gently on floor (silent, ready for user touch)
         const currentIdx = timelineIndexRef.current;
         const step = AUTOMATED_TIMELINE[currentIdx];
         setSecondsRemaining(step.durationSeconds);
         applyPosePosition(step.pose);
         setPose(step.pose);
-        triggerDialogue(step.pose, step.dialogue);
+        if (step.dialogue) {
+          setSpeechText(step.dialogue);
+        }
       }
     } else {
       // Direct touch or click triggers the comment dialogue & cycles pose

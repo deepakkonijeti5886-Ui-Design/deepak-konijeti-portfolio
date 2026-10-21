@@ -66,13 +66,13 @@ export default function App() {
           <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
 
           {/* Anchor for portrait positioning matching reference site */}
-          <div className="absolute inset-x-0 top-[30vh] md:top-[2vh] z-10 text-center text-white flex flex-col items-center w-full pointer-events-none">
+          <div className="absolute inset-x-0 top-[15vh] sm:top-[8vh] md:top-[4vh] z-10 text-center text-white flex flex-col items-center w-full pointer-events-none">
             <img
               ref={heroAnchorRef}
               src={portraitSrc}
               alt=""
               aria-hidden="true"
-              className="invisible w-auto max-w-none h-[110vh] md:h-[143vh]"
+              className="invisible w-auto max-w-none h-[85vh] sm:h-[95vh] md:h-[105vh] lg:h-[114vh] max-h-[860px]"
             />
           </div>
 
