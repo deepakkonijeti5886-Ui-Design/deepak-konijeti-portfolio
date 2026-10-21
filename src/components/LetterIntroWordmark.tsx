@@ -104,7 +104,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
                                 if (titleBoxRef.current) {
                                   const isMobile = window.innerWidth < 768;
                                   gsap.to(titleBoxRef.current, {
-                                    top: isMobile ? '38%' : '88%',
+                                    top: isMobile ? '38%' : '76%',
                                     duration: 1.4,
                                     ease: 'power3.inOut',
                                     onComplete: () => {
@@ -194,7 +194,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
         <div
           ref={titleBoxRef}
           className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center md:items-start w-full px-6 md:px-16 max-w-7xl transition-all duration-700 pointer-events-none"
-          style={{ top: phase === 'portfolio_settled' ? '88%' : '50%' }}
+          style={{ top: phase === 'portfolio_settled' ? '76%' : '50%' }}
         >
           {/* Giant PORTFOLIO title docked at the lower boundary */}
           <h1 className="text-[14vw] md:text-[8rem] lg:text-[9.5rem] font-black tracking-tighter drop-shadow-2xl leading-none uppercase text-metallic font-sans">
@@ -220,7 +220,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
           {/* Sub-hero info row */}
           <div
             ref={subtitleRef}
-            className="w-full flex flex-col md:flex-row md:items-center justify-between gap-6 mt-6 md:mt-8 opacity-0 pointer-events-auto"
+            className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 mt-3 md:mt-4 opacity-0 pointer-events-auto"
           >
             <div className="flex items-center gap-2">
               <p className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-white">
