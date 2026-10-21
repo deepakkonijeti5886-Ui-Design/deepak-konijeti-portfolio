@@ -193,12 +193,12 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
       {(phase === 'portfolio_in' || phase === 'portfolio_settled') && (
         <div
           ref={titleBoxRef}
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center w-full px-6 sm:px-12 md:px-16 max-w-7xl transition-all duration-700 pointer-events-none"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center w-full px-6 sm:px-12 md:px-16 max-w-6xl transition-all duration-700 pointer-events-none"
           style={{ top: phase === 'portfolio_settled' ? '84%' : '50%' }}
         >
-          {/* Sized-down PORTFOLIO title: 100% visible with clean breathing room on all sides */}
-          <h1 className="w-full flex items-center justify-center text-[8.5vw] sm:text-[7.5vw] md:text-[4.2rem] lg:text-[5.2rem] xl:text-[6.4rem] 2xl:text-[7.5rem] font-extrabold tracking-[-0.03em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none">
-            <span className="inline-flex tracking-[-0.02em] whitespace-nowrap">
+          {/* Refined, compact PORTFOLIO wordmark with generous breathing room */}
+          <h1 className="w-full flex items-center justify-center text-[7.2vw] sm:text-[6.5vw] md:text-[3.5rem] lg:text-[4.4rem] xl:text-[5.4rem] 2xl:text-[6.4rem] font-extrabold tracking-[-0.02em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none">
+            <span className="inline-flex tracking-[-0.01em] whitespace-nowrap">
               {portfolioChars.map((char, i) => {
                 const isVisible = i < portfolioRevealed;
                 return (
