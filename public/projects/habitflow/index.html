@@ -538,6 +538,29 @@
       box-shadow: 0 0 16px var(--success-glow);
       animation: popCheck 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+
+    .habit-del-btn {
+      opacity: 0;
+      pointer-events: none;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .habit-card:hover .habit-del-btn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .habit-del-btn:hover {
+      color: var(--danger);
+      background: rgba(255, 107, 107, 0.15);
+    }
     .habit-check.done svg {
       stroke: #0a0a0f;
     }
@@ -1293,13 +1316,20 @@
           </div>
         </div>
 
-        <button class="btn-reset-demo" id="btnResetDemo">Reset Demo Habits Data</button>
+        <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 14px;">
+          <button class="btn-reset-demo" id="btnExportHabits" style="background: rgba(108, 92, 231, 0.15); border-color: rgba(108, 92, 231, 0.3); color: var(--accent-light);">
+            📥 Export Habit Database (JSON)
+          </button>
+          <button class="btn-reset-demo" id="btnResetDemo">
+            🔄 Reset Demo Habits Data
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- Footer -->
     <div class="footer-credit">
-      Designed & Engineered by <a href="/">Deepak Konijeti</a> · HabitFlow Pro v2.4
+      Designed & Engineered by <a href="https://deepak-konijeti-portfolio.vercel.app">Deepak Konijeti</a> · HabitFlow Pro v2.4
     </div>
   </div>
 
@@ -1546,10 +1576,21 @@
               <span class="habit-streak">🔥 ${h.streak}d streak</span>
             </div>
           </div>
-          <div class="habit-check ${h.done ? 'done' : ''}" data-id="${h.id}">
-            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button class="habit-del-btn" data-id="${h.id}" title="Delete Habit" aria-label="Delete">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="habit-check ${h.done ? 'done' : ''}" data-id="${h.id}">
+              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
           </div>
         `;
+
+        const delBtn = card.querySelector('.habit-del-btn');
+        delBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteHabit(h.id);
+        });
 
         // Click card or check button toggles habit
         card.addEventListener('click', (e) => {
@@ -1558,6 +1599,18 @@
 
         habitListEl.appendChild(card);
       });
+    }
+
+    function deleteHabit(id) {
+      const idx = habits.findIndex(h => h.id === id);
+      if (idx !== -1) {
+        const removed = habits.splice(idx, 1)[0];
+        saveHabits(habits);
+        renderHabits();
+        renderStatsBars();
+        playBeep(260, 'sine', 0.1);
+        showToast(`🗑️ Deleted habit: "${removed.name}"`);
+      }
     }
 
     function toggleHabit(id) {
@@ -1726,6 +1779,22 @@
       playBeep(440, 'triangle', 0.15);
       switchTab('home');
     });
+
+    // Export Database JSON
+    const btnExportHabits = document.getElementById('btnExportHabits');
+    if (btnExportHabits) {
+      btnExportHabits.addEventListener('click', () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(habits, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `habitflow_backup_${new Date().toISOString().slice(0,10)}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        showToast('📥 Exported habit database as JSON');
+        playBeep(660, 'sine', 0.1);
+      });
+    }
 
     // ==========================================
     // CALENDAR HEATMAP GENERATION & INTERACTION
