@@ -1076,6 +1076,99 @@
     .btn-reset-demo:hover {
       background: rgba(255, 107, 107, 0.25);
     }
+
+    /* Auth & User Switcher Modal */
+    .user-pill-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 10px 4px 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .user-pill-btn:hover {
+      border-color: var(--accent-light);
+      background: rgba(108, 92, 231, 0.12);
+    }
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(254, 202, 87, 0.15);
+      border: 1px solid rgba(254, 202, 87, 0.3);
+      color: var(--warning);
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 9px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .auth-tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+    .oauth-btn {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+    }
+    .oauth-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--border-hover);
+    }
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 12px 0 16px;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
   </style>
 </head>
 <body>
@@ -1294,14 +1387,31 @@
     <!-- ==================== TAB 4: PROFILE ==================== -->
     <div class="tab-view" id="viewProfile">
       <div class="profile-card">
-        <div class="profile-big-avatar">DK</div>
-        <div class="profile-name">Deepak Konijeti</div>
-        <div class="profile-role">Senior Product Designer & Full-Stack Engineer</div>
-        <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5;">
+        <div class="level-badge" id="profileLevelBadge">⚡ LEVEL 7 · HABIT MASTER</div>
+        <div class="profile-big-avatar" id="profileBigAvatar">DK</div>
+        <div class="profile-name" id="profileUserName">Deepak Konijeti</div>
+        <div class="profile-role" id="profileUserRole">Senior Product Designer & Full-Stack Engineer</div>
+        
+        <!-- Gamification XP bar -->
+        <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 16px; padding: 14px; margin-bottom: 16px; text-align: left;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; margin-bottom: 6px;">
+            <span style="color: var(--text-secondary);">Level Progress</span>
+            <span style="color: var(--accent-light);" id="xpText">2,840 / 3,000 XP (94%)</span>
+          </div>
+          <div style="height: 7px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden;">
+            <div id="xpProgressBar" style="width: 94%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--pink)); border-radius: 999px;"></div>
+          </div>
+        </div>
+
+        <p style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5;" id="profileUserBio">
           Creator of HabitFlow Pro. Engineered with vanilla high-performance JavaScript, reactive state syncing, and haptic web audio.
         </p>
 
         <div class="settings-list">
+          <div class="setting-item">
+            <span>Current Account</span>
+            <span style="color: var(--accent-light); font-weight: 700;" id="settingAccountEmail">deepak@portfolio.io</span>
+          </div>
           <div class="setting-item">
             <span>Sound Effects (Web Audio)</span>
             <span style="color: var(--success); font-weight: 700;" id="settingSoundState">Enabled</span>
@@ -1317,7 +1427,10 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 14px;">
-          <button class="btn-reset-demo" id="btnExportHabits" style="background: rgba(108, 92, 231, 0.15); border-color: rgba(108, 92, 231, 0.3); color: var(--accent-light);">
+          <button class="btn-reset-demo" id="btnSwitchAccount" style="background: rgba(108, 92, 231, 0.15); border-color: rgba(108, 92, 231, 0.3); color: var(--accent-light);">
+            👤 Switch / Login Account
+          </button>
+          <button class="btn-reset-demo" id="btnExportHabits" style="background: rgba(0, 210, 160, 0.12); border-color: rgba(0, 210, 160, 0.3); color: var(--success);">
             📥 Export Habit Database (JSON)
           </button>
           <button class="btn-reset-demo" id="btnResetDemo">
@@ -1403,6 +1516,50 @@
       </div>
 
       <button type="button" class="btn-submit-habit" id="btnSaveHabit">Add Habit to Tracker</button>
+    </div>
+  </div>
+
+  <!-- Auth Modal (Login / Signup) -->
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 class="modal-title" id="authModalTitle">Welcome to HabitFlow</h3>
+        <button class="modal-close" id="closeAuthModalBtn">&times;</button>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="authTabLogin">Sign In</button>
+        <button type="button" class="auth-tab-btn" id="authTabSignup">Create Account</button>
+      </div>
+
+      <button type="button" class="oauth-btn" id="btnGoogleAuth">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <button type="button" class="oauth-btn" id="btnAppleAuth">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8 1.01-2.88-.9.04-1.99.6-2.64 1.35-.58.65-1.09 1.71-.96 2.76 1 .08 2.01-.52 2.59-1.23z"/></svg>
+        <span>Continue with Apple ID</span>
+      </button>
+
+      <div class="auth-divider">or email credentials</div>
+
+      <div class="form-group" id="authNameGroup" style="display: none;">
+        <label class="form-label">Full Name</label>
+        <input type="text" id="authNameInput" class="form-input" placeholder="e.g. Maya Lin" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="authEmailInput" class="form-input" placeholder="name@domain.com" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" id="authPasswordInput" class="form-input" placeholder="••••••••••••" />
+      </div>
+
+      <button type="button" class="btn-submit-habit" id="btnSubmitAuth">Sign In & Sync Habits</button>
     </div>
   </div>
 
@@ -1894,8 +2051,196 @@
     }
 
     // ==========================================
+    // AUTH & USER SESSION PERSISTENCE ENGINE
+    // ==========================================
+    const DB_KEY_USER = 'habitflow_user_v2';
+    const DEFAULT_HABIT_USER = {
+      name: 'Deepak Konijeti',
+      nickname: 'Deepak K.',
+      email: 'deepak@portfolio.io',
+      role: 'Staff Architect & Lead Dev',
+      bio: 'Creator of HabitFlow Pro. Engineered with vanilla high-performance JavaScript, reactive state syncing, and haptic web audio.',
+      avatarInitials: 'DK',
+      level: 7,
+      levelTitle: 'HABIT MASTER',
+      currentXP: 2840,
+      targetXP: 3000
+    };
+
+    function getHabitUser() {
+      try {
+        const u = localStorage.getItem(DB_KEY_USER);
+        if (u) return JSON.parse(u);
+      } catch(e) {}
+      return DEFAULT_HABIT_USER;
+    }
+
+    function setHabitUser(user) {
+      localStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+      syncHabitUserUI();
+    }
+
+    function syncHabitUserUI() {
+      const u = getHabitUser();
+      const topName = document.querySelector('.top-bar-name span');
+      const topAvatar = document.getElementById('avatarBtn');
+      const pAvatar = document.getElementById('profileBigAvatar');
+      const pName = document.getElementById('profileUserName');
+      const pRole = document.getElementById('profileUserRole');
+      const pBio = document.getElementById('profileUserBio');
+      const pEmail = document.getElementById('settingAccountEmail');
+      const pBadge = document.getElementById('profileLevelBadge');
+      const xpText = document.getElementById('xpText');
+      const xpBar = document.getElementById('xpProgressBar');
+
+      if (topName) topName.textContent = u.nickname || u.name.split(' ')[0] + ' ' + (u.name.split(' ')[1] ? u.name.split(' ')[1][0] + '.' : '');
+      if (topAvatar) topAvatar.textContent = u.avatarInitials || 'DK';
+      if (pAvatar) pAvatar.textContent = u.avatarInitials || 'DK';
+      if (pName) pName.textContent = u.name;
+      if (pRole) pRole.textContent = u.role;
+      if (pBio) pBio.textContent = u.bio;
+      if (pEmail) pEmail.textContent = u.email;
+      if (pBadge) pBadge.textContent = `⚡ LEVEL ${u.level || 1} · ${u.levelTitle || 'HABIT STARTER'}`;
+      
+      const pct = Math.min(100, Math.round(((u.currentXP || 100) / (u.targetXP || 1000)) * 100));
+      if (xpText) xpText.textContent = `${(u.currentXP || 100).toLocaleString()} / ${(u.targetXP || 1000).toLocaleString()} XP (${pct}%)`;
+      if (xpBar) xpBar.style.width = `${pct}%`;
+    }
+
+    // Auth Modal handling
+    const authModal = document.getElementById('authModal');
+    const authTabLogin = document.getElementById('authTabLogin');
+    const authTabSignup = document.getElementById('authTabSignup');
+    const authModalTitle = document.getElementById('authModalTitle');
+    const authNameGroup = document.getElementById('authNameGroup');
+    const authNameInput = document.getElementById('authNameInput');
+    const authEmailInput = document.getElementById('authEmailInput');
+    const authPasswordInput = document.getElementById('authPasswordInput');
+    const btnSubmitAuth = document.getElementById('btnSubmitAuth');
+    const closeAuthModalBtn = document.getElementById('closeAuthModalBtn');
+    let habitAuthMode = 'login';
+
+    function openAuthModal(mode = 'login') {
+      habitAuthMode = mode;
+      if (habitAuthMode === 'login') {
+        if (authTabLogin) authTabLogin.classList.add('active');
+        if (authTabSignup) authTabSignup.classList.remove('active');
+        if (authModalTitle) authModalTitle.textContent = 'Welcome back to HabitFlow';
+        if (authNameGroup) authNameGroup.style.display = 'none';
+        if (btnSubmitAuth) btnSubmitAuth.textContent = 'Sign In & Sync Habits';
+      } else {
+        if (authTabSignup) authTabSignup.classList.add('active');
+        if (authTabLogin) authTabLogin.classList.remove('active');
+        if (authModalTitle) authModalTitle.textContent = 'Create your HabitFlow account';
+        if (authNameGroup) authNameGroup.style.display = 'block';
+        if (btnSubmitAuth) btnSubmitAuth.textContent = 'Create Account & Begin Flow';
+      }
+      if (authModal) authModal.classList.add('active');
+    }
+
+    function closeAuthModal() {
+      if (authModal) authModal.classList.remove('active');
+    }
+
+    if (authTabLogin) authTabLogin.addEventListener('click', () => openAuthModal('login'));
+    if (authTabSignup) authTabSignup.addEventListener('click', () => openAuthModal('signup'));
+    if (closeAuthModalBtn) closeAuthModalBtn.addEventListener('click', closeAuthModal);
+
+    // Profile top avatar click opens Auth / profile
+    const avatarBtn = document.getElementById('avatarBtn');
+    if (avatarBtn) {
+      avatarBtn.addEventListener('click', () => {
+        openAuthModal('login');
+      });
+    }
+
+    const btnSwitchAccount = document.getElementById('btnSwitchAccount');
+    if (btnSwitchAccount) {
+      btnSwitchAccount.addEventListener('click', () => {
+        openAuthModal('login');
+      });
+    }
+
+    // Google OAuth Simulation
+    const btnGoogleAuth = document.getElementById('btnGoogleAuth');
+    if (btnGoogleAuth) {
+      btnGoogleAuth.addEventListener('click', () => {
+        setHabitUser({
+          name: 'Elena Rostova',
+          nickname: 'Elena R.',
+          email: 'elena.rostova@gmail.com',
+          role: 'Biohacker & Product Lead',
+          bio: 'Tracking circadian rhythm, morning mindfulness, and zone 2 cardio.',
+          avatarInitials: 'ER',
+          level: 9,
+          levelTitle: 'FLOW ARCHITECT',
+          currentXP: 4520,
+          targetXP: 5000
+        });
+        closeAuthModal();
+        showToast('Signed in via Google SSO as Elena Rostova');
+        playBeep(784, 'sine', 0.15);
+      });
+    }
+
+    // Apple OAuth Simulation
+    const btnAppleAuth = document.getElementById('btnAppleAuth');
+    if (btnAppleAuth) {
+      btnAppleAuth.addEventListener('click', () => {
+        setHabitUser({
+          name: 'Marcus Vance',
+          nickname: 'Marcus V.',
+          email: 'marcus.vance@icloud.com',
+          role: 'Endurance Athlete & Engineer',
+          bio: 'Building habits for athletic performance and deep focus coding sessions.',
+          avatarInitials: 'MV',
+          level: 12,
+          levelTitle: 'ZEN GRANDMASTER',
+          currentXP: 7890,
+          targetXP: 8000
+        });
+        closeAuthModal();
+        showToast('Signed in via Apple ID as Marcus Vance');
+        playBeep(784, 'sine', 0.15);
+      });
+    }
+
+    // Submit Auth Form
+    if (btnSubmitAuth) {
+      btnSubmitAuth.addEventListener('click', () => {
+        const email = authEmailInput ? authEmailInput.value.trim() : '';
+        const name = (authNameInput && authNameInput.value.trim()) || (email ? email.split('@')[0] : 'Hero');
+        if (!email) {
+          showToast('⚠️ Please enter an email address');
+          return;
+        }
+
+        const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'HB';
+        const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+
+        setHabitUser({
+          name: formattedName,
+          nickname: formattedName,
+          email: email,
+          role: habitAuthMode === 'signup' ? 'Habit Flow Explorer' : 'Active Flow Member',
+          bio: 'Transforming daily systems into enduring habits with HabitFlow Pro.',
+          avatarInitials: initials,
+          level: habitAuthMode === 'signup' ? 1 : 5,
+          levelTitle: habitAuthMode === 'signup' ? 'NOVICE BUILDER' : 'CONSISTENT ACHIEVER',
+          currentXP: habitAuthMode === 'signup' ? 250 : 1800,
+          targetXP: habitAuthMode === 'signup' ? 500 : 2000
+        });
+
+        closeAuthModal();
+        showToast(habitAuthMode === 'signup' ? `🎉 Welcome to HabitFlow, ${formattedName}!` : `✨ Welcome back, ${formattedName}!`);
+        playBeep(659, 'sine', 0.15);
+      });
+    }
+
+    // ==========================================
     // INITIALIZATION
     // ==========================================
+    syncHabitUserUI();
     renderHabits();
     renderCalendar();
     renderStatsBars();

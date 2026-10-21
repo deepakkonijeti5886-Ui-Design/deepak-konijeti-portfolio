@@ -572,7 +572,95 @@
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 2000; backdrop-filter: blur(16px);
     }
-    .toast-pill.show { transform: translateY(0); opacity: 1; }
+    /* ========== AUTH MODAL & PROFILE STYLES ========== */
+    .auth-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.03); padding: 4px; border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+    .auth-tab-btn {
+      flex: 1; padding: 10px; border-radius: 11px; font-size: 0.78rem; font-weight: 700;
+      border: none; background: transparent; color: var(--text-2); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .auth-tab-btn.active {
+      background: var(--blue); color: #fff; box-shadow: 0 4px 14px var(--blue-glow);
+    }
+
+    .auth-provider-btn {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 11px; border-radius: 12px; background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border); color: var(--text-1); font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; margin-bottom: 12px;
+    }
+    .auth-provider-btn:hover {
+      background: rgba(255, 255, 255, 0.07); border-color: var(--border-hover);
+    }
+
+    .auth-divider {
+      display: flex; align-items: center; gap: 12px; margin: 16px 0;
+      color: var(--text-3); font-size: 0.65rem; text-transform: uppercase; font-weight: 700;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* Tab Views */
+    .tab-section {
+      display: none; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .tab-section.active { display: block; }
+
+    /* Account Card Bento */
+    .accounts-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;
+    }
+    .account-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 22px;
+      position: relative; overflow: hidden; transition: all 0.3s;
+    }
+    .account-card:hover {
+      border-color: var(--border-hover); transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.4);
+    }
+    .account-card-top {
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+    }
+    .account-chip {
+      width: 38px; height: 26px; border-radius: 6px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; font-weight: 900; color: #fff;
+    }
+
+    /* User Profile Dropdown Menu */
+    .user-menu-dropdown {
+      position: absolute; top: calc(100% + 10px); right: 0;
+      width: 240px; background: #0c0d16; border: 1px solid var(--border-hover);
+      border-radius: 18px; padding: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      z-index: 500; display: none; transform-origin: top right;
+      animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .user-menu-dropdown.show { display: block; }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.92) translateY(-6px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .user-menu-header {
+      padding: 8px 10px 12px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
+    }
+    .user-menu-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px;
+      color: var(--text-2); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .user-menu-item:hover {
+      background: rgba(255, 255, 255, 0.05); color: #fff;
+    }
+    .user-menu-item.danger:hover {
+      background: var(--red-dim); color: var(--red);
+    }
   </style>
 </head>
 <body>
@@ -612,145 +700,243 @@
           <span>New Entry</span>
         </button>
 
-        <div class="user-pill">
-          <div class="user-avatar">DK</div>
-          <span class="user-name">Deepak</span>
+        <div style="position: relative;">
+          <div class="user-pill" id="userPillBtn" title="Account Settings">
+            <div class="user-avatar" id="navAvatar">DK</div>
+            <span class="user-name" id="navUserName">Deepak</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+
+          <!-- User Dropdown Menu -->
+          <div class="user-menu-dropdown" id="userMenuDropdown">
+            <div class="user-menu-header">
+              <div style="font-weight: 800; font-size: 0.85rem; color: #fff;" id="menuUserFullName">Deepak Konijeti</div>
+              <div style="font-size: 0.68rem; color: var(--text-3); font-family: 'JetBrains Mono', monospace;" id="menuUserEmail">deepak.konijeti5886@gmail.com</div>
+              <div style="display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 999px; background: rgba(59, 130, 246, 0.15); color: var(--blue); font-size: 0.6rem; font-weight: 700;">PRO TIER ACTIVATED</div>
+            </div>
+            <div class="user-menu-item" id="menuSwitchAccount">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Switch / Login User</span>
+            </div>
+            <div class="user-menu-item" id="menuClearData">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              <span>Reset Local Database</span>
+            </div>
+            <div class="user-menu-item danger" id="menuLogout">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              <span>Sign Out Session</span>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
 
-    <!-- Balance Cards -->
-    <div class="balance-row">
-      <div class="balance-card">
-        <div class="bc-header">
-          <span class="bc-label">Total Balance</span>
-          <span class="bc-badge up">↑ +12.4%</span>
+    <!-- TAB 1: DASHBOARD (Active View) -->
+    <div class="tab-section active" id="viewDashboard">
+      <!-- Balance Cards -->
+      <div class="balance-row">
+        <div class="balance-card">
+          <div class="bc-header">
+            <span class="bc-label">Total Balance</span>
+            <span class="bc-badge up">↑ +12.4%</span>
+          </div>
+          <div class="bc-amount"><span class="currency">$</span><span id="totalBalance">0</span></div>
+          <div class="bc-sub">Across 3 verified accounts</div>
+          <div class="sparkline-bar" id="spark1"></div>
         </div>
-        <div class="bc-amount"><span class="currency">$</span><span id="totalBalance">0</span></div>
-        <div class="bc-sub">Across 3 accounts</div>
-        <div class="sparkline-bar" id="spark1"></div>
-      </div>
-      <div class="balance-card">
-        <div class="bc-header">
-          <span class="bc-label">Monthly Income</span>
-          <span class="bc-badge up">↑ +5.2%</span>
+        <div class="balance-card">
+          <div class="bc-header">
+            <span class="bc-label">Monthly Income</span>
+            <span class="bc-badge up">↑ +5.2%</span>
+          </div>
+          <div class="bc-amount"><span class="currency">$</span><span id="monthIncome">0</span></div>
+          <div class="bc-sub">October 2026 Fiscal Flow</div>
+          <div class="sparkline-bar" id="spark2"></div>
         </div>
-        <div class="bc-amount"><span class="currency">$</span><span id="monthIncome">0</span></div>
-        <div class="bc-sub">October 2026</div>
-        <div class="sparkline-bar" id="spark2"></div>
-      </div>
-      <div class="balance-card">
-        <div class="bc-header">
-          <span class="bc-label">Monthly Expenses</span>
-          <span class="bc-badge down">↑ +3.8%</span>
+        <div class="balance-card">
+          <div class="bc-header">
+            <span class="bc-label">Monthly Expenses</span>
+            <span class="bc-badge down">↑ +3.8%</span>
+          </div>
+          <div class="bc-amount"><span class="currency">$</span><span id="monthExpense">0</span></div>
+          <div class="bc-sub"><span id="txCountBadge">8</span> active ledger records</div>
+          <div class="sparkline-bar" id="spark3"></div>
         </div>
-        <div class="bc-amount"><span class="currency">$</span><span id="monthExpense">0</span></div>
-        <div class="bc-sub">18 transactions</div>
-        <div class="sparkline-bar" id="spark3"></div>
       </div>
-    </div>
 
-    <!-- Main Grid: Chart + Transactions -->
-    <div class="main-grid">
-      <div class="card">
+      <!-- Main Grid: Chart + Transactions -->
+      <div class="main-grid">
+        <div class="card">
+          <div class="card-title">
+            <span>Spending Overview</span>
+            <span class="pill">Real-Time Forecast</span>
+          </div>
+          <div class="chart-container">
+            <svg class="chart-svg" viewBox="0 0 600 260" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--blue)" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="var(--blue)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- Grid lines -->
+              <line class="chart-grid-line" x1="50" y1="40" x2="580" y2="40"/>
+              <line class="chart-grid-line" x1="50" y1="95" x2="580" y2="95"/>
+              <line class="chart-grid-line" x1="50" y1="150" x2="580" y2="150"/>
+              <line class="chart-grid-line" x1="50" y1="205" x2="580" y2="205"/>
+              <!-- Y labels -->
+              <text class="chart-label chart-y-label" x="44" y="44">$8k</text>
+              <text class="chart-label chart-y-label" x="44" y="99">$6k</text>
+              <text class="chart-label chart-y-label" x="44" y="154">$4k</text>
+              <text class="chart-label chart-y-label" x="44" y="209">$2k</text>
+              <!-- X labels -->
+              <text class="chart-label" x="80" y="240">Week 1</text>
+              <text class="chart-label" x="210" y="240">Week 2</text>
+              <text class="chart-label" x="340" y="240">Week 3</text>
+              <text class="chart-label" x="470" y="240">Week 4</text>
+              <!-- Area -->
+              <path class="chart-area-path" d="M70,180 C120,170 150,120 200,100 C250,80 280,135 330,110 C380,85 420,60 470,75 C520,90 550,50 570,40 L570,220 L70,220 Z"/>
+              <!-- Line -->
+              <path class="chart-line-path" d="M70,180 C120,170 150,120 200,100 C250,80 280,135 330,110 C380,85 420,60 470,75 C520,90 550,50 570,40"/>
+              <!-- Dots -->
+              <circle class="chart-dot" cx="70" cy="180" style="animation: dotAppear 0.3s 2s both;"/>
+              <circle class="chart-dot" cx="200" cy="100" style="animation: dotAppear 0.3s 2.15s both;"/>
+              <circle class="chart-dot" cx="330" cy="110" style="animation: dotAppear 0.3s 2.3s both;"/>
+              <circle class="chart-dot" cx="470" cy="75" style="animation: dotAppear 0.3s 2.45s both;"/>
+              <circle class="chart-dot" cx="570" cy="40" style="animation: dotAppear 0.3s 2.6s both;"/>
+            </svg>
+            <style>
+              @keyframes dotAppear { to { opacity: 0.8; } }
+            </style>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" style="flex-wrap: wrap; gap: 8px;">
+            <span>Recent Transactions</span>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <input type="text" id="txSearchInput" class="tx-search-input" placeholder="Search entries..." />
+              <button class="pill" id="txFilterAll" style="background: rgba(59, 130, 246, 0.2); color: var(--blue);">All</button>
+              <button class="pill" id="txFilterExp">Expense</button>
+              <button class="pill" id="txFilterInc">Income</button>
+            </div>
+          </div>
+          <div class="tx-list" id="txList">
+            <!-- JS Rendered -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Breakdown -->
+      <div class="card" style="margin-top: 16px;">
         <div class="card-title">
-          <span>Spending Overview</span>
-          <span class="pill">Last 30 Days</span>
+          <span>Category Breakdown</span>
+          <span class="pill" id="btnResetDatabase" style="cursor: pointer; background: rgba(255, 90, 125, 0.1); color: var(--red); border-color: rgba(255, 90, 125, 0.3);">Reset Mock DB</span>
         </div>
-        <div class="chart-container">
-          <svg class="chart-svg" viewBox="0 0 600 260" preserveAspectRatio="none">
-            <defs>
-              <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="var(--blue)" stop-opacity="0.25"/>
-                <stop offset="100%" stop-color="var(--blue)" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <!-- Grid lines -->
-            <line class="chart-grid-line" x1="50" y1="40" x2="580" y2="40"/>
-            <line class="chart-grid-line" x1="50" y1="95" x2="580" y2="95"/>
-            <line class="chart-grid-line" x1="50" y1="150" x2="580" y2="150"/>
-            <line class="chart-grid-line" x1="50" y1="205" x2="580" y2="205"/>
-            <!-- Y labels -->
-            <text class="chart-label chart-y-label" x="44" y="44">$8k</text>
-            <text class="chart-label chart-y-label" x="44" y="99">$6k</text>
-            <text class="chart-label chart-y-label" x="44" y="154">$4k</text>
-            <text class="chart-label chart-y-label" x="44" y="209">$2k</text>
-            <!-- X labels -->
-            <text class="chart-label" x="80" y="240">Week 1</text>
-            <text class="chart-label" x="210" y="240">Week 2</text>
-            <text class="chart-label" x="340" y="240">Week 3</text>
-            <text class="chart-label" x="470" y="240">Week 4</text>
-            <!-- Area -->
-            <path class="chart-area-path" d="M70,180 C120,170 150,120 200,100 C250,80 280,135 330,110 C380,85 420,60 470,75 C520,90 550,50 570,40 L570,220 L70,220 Z"/>
-            <!-- Line -->
-            <path class="chart-line-path" d="M70,180 C120,170 150,120 200,100 C250,80 280,135 330,110 C380,85 420,60 470,75 C520,90 550,50 570,40"/>
-            <!-- Dots -->
-            <circle class="chart-dot" cx="70" cy="180" style="animation: dotAppear 0.3s 2s both;"/>
-            <circle class="chart-dot" cx="200" cy="100" style="animation: dotAppear 0.3s 2.15s both;"/>
-            <circle class="chart-dot" cx="330" cy="110" style="animation: dotAppear 0.3s 2.3s both;"/>
-            <circle class="chart-dot" cx="470" cy="75" style="animation: dotAppear 0.3s 2.45s both;"/>
-            <circle class="chart-dot" cx="570" cy="40" style="animation: dotAppear 0.3s 2.6s both;"/>
-          </svg>
-          <style>
-            @keyframes dotAppear { to { opacity: 0.8; } }
-          </style>
-        </div>
+        <div class="categories-grid" id="catGrid"></div>
       </div>
 
-      <div class="card">
-        <div class="card-title" style="flex-wrap: wrap; gap: 8px;">
-          <span>Recent Transactions</span>
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <input type="text" id="txSearchInput" class="tx-search-input" placeholder="Search entries..." />
-            <button class="pill" id="txFilterAll" style="background: rgba(59, 130, 246, 0.2); color: var(--blue);">All</button>
-            <button class="pill" id="txFilterExp">Expense</button>
-            <button class="pill" id="txFilterInc">Income</button>
-          </div>
+      <!-- Bottom Row: Budgets + Quick Actions -->
+      <div class="bottom-row">
+        <div class="card">
+          <div class="card-title"><span>Budget Tracking</span></div>
+          <div class="budget-list" id="budgetList"></div>
         </div>
-        <div class="tx-list" id="txList">
-          <!-- JS Rendered -->
+        <div class="card">
+          <div class="card-title"><span>Quick Actions</span></div>
+          <div class="quick-actions">
+            <div class="qa-card" id="qaSendMoney">
+              <div class="qa-icon" style="background: var(--green-dim);">💸</div>
+              <div class="qa-label">New Expense</div>
+              <div class="qa-sub">Instant record</div>
+            </div>
+            <div class="qa-card" id="qaExportPdf">
+              <div class="qa-icon" style="background: var(--blue-dim);">📊</div>
+              <div class="qa-label">Export JSON</div>
+              <div class="qa-sub">Backup database</div>
+            </div>
+            <div class="qa-card" id="qaSetGoal">
+              <div class="qa-icon" style="background: var(--purple-dim);">🎯</div>
+              <div class="qa-label">New Income</div>
+              <div class="qa-sub">Deposit / Salary</div>
+            </div>
+            <div class="qa-card" id="qaScanReceipt">
+              <div class="qa-icon" style="background: var(--orange-dim);">🧾</div>
+              <div class="qa-label">Scan Receipt</div>
+              <div class="qa-sub">Auto demo entry</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Category Breakdown -->
-    <div class="card" style="margin-top: 16px;">
-      <div class="card-title">
-        <span>Category Breakdown</span>
-        <span class="pill" id="btnResetDatabase" style="cursor: pointer; background: rgba(255, 90, 125, 0.1); color: var(--red); border-color: rgba(255, 90, 125, 0.3);">Reset Mock DB</span>
+    <!-- TAB 2: ANALYTICS -->
+    <div class="tab-section" id="viewAnalytics">
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="card-title">
+          <span>Financial Velocity & Cash Flow Matrix</span>
+          <span class="pill" style="color: var(--green); border-color: var(--green-dim);">Live Velocity: 94.2%</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+          <div style="padding: 18px; border-radius: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border);">
+            <div style="font-size: 0.68rem; color: var(--text-3); text-transform: uppercase; font-weight: 700;">Net Burn Rate</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--green); margin: 6px 0;" id="analyticsBurnRate">$107.20 / day</div>
+            <div style="font-size: 0.7rem; color: var(--text-2);">Healthy surplus pace</div>
+          </div>
+          <div style="padding: 18px; border-radius: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border);">
+            <div style="font-size: 0.68rem; color: var(--text-3); text-transform: uppercase; font-weight: 700;">Savings Quotient</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--blue); margin: 6px 0;" id="analyticsSavingsRate">61.8%</div>
+            <div style="font-size: 0.7rem; color: var(--text-2);">Well above 50/30/20 benchmark</div>
+          </div>
+          <div style="padding: 18px; border-radius: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border);">
+            <div style="font-size: 0.68rem; color: var(--text-3); text-transform: uppercase; font-weight: 700;">Runway Horizon</div>
+            <div style="font-size: 1.5rem; font-weight: 800; color: var(--purple); margin: 6px 0;">14.8 Months</div>
+            <div style="font-size: 0.7rem; color: var(--text-2);">Emergency liquidity reserve</div>
+          </div>
+        </div>
+        <div style="padding: 18px; border-radius: 16px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.2); font-size: 0.8rem; line-height: 1.6; color: var(--text-2);">
+          💡 <strong style="color: #fff;">Algorithmic Recommendation:</strong> Your top spending category this month is <span style="color: var(--blue); font-weight: 700;" id="analyticsTopCat">Housing & Rent</span>. Diverting $350/mo into high-yield liquidity yields an extra ~$1,420 annual dividend return.
+        </div>
       </div>
-      <div class="categories-grid" id="catGrid"></div>
     </div>
 
-    <!-- Bottom Row: Budgets + Quick Actions -->
-    <div class="bottom-row">
-      <div class="card">
-        <div class="card-title"><span>Budget Tracking</span></div>
-        <div class="budget-list" id="budgetList"></div>
+    <!-- TAB 3: BUDGETS -->
+    <div class="tab-section" id="viewBudgets">
+      <div class="card" style="margin-bottom: 20px;">
+        <div class="card-title">
+          <span>Active Budget Allocations</span>
+          <span class="pill" style="color: var(--blue);">Automated Alerts</span>
+        </div>
+        <div class="budget-list" id="viewBudgetListFull" style="display: flex; flex-direction: column; gap: 16px;"></div>
       </div>
-      <div class="card">
-        <div class="card-title"><span>Quick Actions</span></div>
-        <div class="quick-actions">
-          <div class="qa-card" id="qaSendMoney">
-            <div class="qa-icon" style="background: var(--green-dim);">💸</div>
-            <div class="qa-label">New Expense</div>
-            <div class="qa-sub">Instant record</div>
+    </div>
+
+    <!-- TAB 4: ACCOUNTS -->
+    <div class="tab-section" id="viewAccounts">
+      <div class="accounts-grid">
+        <div class="account-card">
+          <div class="account-card-top">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-2);">J.P. MORGAN CHASE</span>
+            <div class="account-chip">VISA</div>
           </div>
-          <div class="qa-card" id="qaExportPdf">
-            <div class="qa-icon" style="background: var(--blue-dim);">📊</div>
-            <div class="qa-label">Export JSON</div>
-            <div class="qa-sub">Backup database</div>
+          <div style="font-size: 1.6rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;"><span class="currency">$</span>34,920.00</div>
+          <div style="font-size: 0.72rem; color: var(--text-3); font-family: 'JetBrains Mono', monospace;">•••• •••• •••• 8421 · Platinum Checking</div>
+        </div>
+        <div class="account-card">
+          <div class="account-card-top">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-2);">SILICON VALLEY VAULT</span>
+            <div class="account-chip" style="background: linear-gradient(135deg, #10b981, #059669);">MC</div>
           </div>
-          <div class="qa-card" id="qaSetGoal">
-            <div class="qa-icon" style="background: var(--purple-dim);">🎯</div>
-            <div class="qa-label">New Income</div>
-            <div class="qa-sub">Deposit / Salary</div>
+          <div style="font-size: 1.6rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;"><span class="currency">$</span>11,450.00</div>
+          <div style="font-size: 0.72rem; color: var(--text-3); font-family: 'JetBrains Mono', monospace;">•••• •••• •••• 9920 · High-Yield Treasury</div>
+        </div>
+        <div class="account-card">
+          <div class="account-card-top">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-2);">STRIPE COMMERCE PAY</span>
+            <div class="account-chip" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">API</div>
           </div>
-          <div class="qa-card" id="qaScanReceipt">
-            <div class="qa-icon" style="background: var(--orange-dim);">🧾</div>
-            <div class="qa-label">Scan Receipt</div>
-            <div class="qa-sub">Auto demo entry</div>
-          </div>
+          <div style="font-size: 1.6rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;"><span class="currency">$</span>1,482.00</div>
+          <div style="font-size: 0.72rem; color: var(--text-3); font-family: 'JetBrains Mono', monospace;">Live Webhook Gateway · Instant Settlement</div>
         </div>
       </div>
     </div>
@@ -758,6 +944,52 @@
     <!-- Footer -->
     <div class="footer">
       Designed & Engineered by <a href="https://deepak-konijeti-portfolio.vercel.app">Deepak Konijeti</a> · SpendTrack v3.0 · <span style="color: var(--green);">● LocalStorage Reactive DB Active</span>
+    </div>
+  </div>
+
+  <!-- Auth Modal (Login / Signup) -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="authModalTitle">Sign in to SpendTrack</h3>
+        <button class="modal-close" id="closeAuthBtn">&times;</button>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="tabBtnLogin">Login</button>
+        <button type="button" class="auth-tab-btn" id="tabBtnSignup">Create Account</button>
+      </div>
+
+      <button type="button" class="auth-provider-btn" id="btnAuthGoogle">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.3H12v4.6h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.9z"/><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12 0 12s.7 2.3 1.9 4.7l3.7-1.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.4C3.7 20.4 7.5 23 12 23z"/></svg>
+        <span>Continue with Google</span>
+      </button>
+
+      <button type="button" class="auth-provider-btn" id="btnAuthGithub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span>Continue with GitHub</span>
+      </button>
+
+      <div class="auth-divider">Or with email</div>
+
+      <div id="signupFields" style="display: none;">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" id="authNameInput" class="form-input" placeholder="e.g. Deepak Konijeti" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Email Address</label>
+        <input type="email" id="authEmailInput" class="form-input" placeholder="name@company.com" />
+      </div>
+
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" id="authPasswordInput" class="form-input" placeholder="••••••••••••" />
+      </div>
+
+      <button type="button" class="modal-btn-submit" id="btnSubmitAuth">Continue to Dashboard</button>
     </div>
   </div>
 
@@ -813,11 +1045,13 @@
     <span id="toastMsg">Transaction recorded successfully</span>
   </div>
 
+  <script>
     // ============================================================
     // SPENDTRACK REACTIVE MOCK DATABASE (LOCALSTORAGE ENGINE)
     // ============================================================
     const DB_KEY_TX = 'spendtrack_tx_v2';
     const DB_KEY_CUR = 'spendtrack_currency_v2';
+    const DB_KEY_USER = 'spendtrack_user_v2';
 
     const CURRENCIES = {
       USD: { symbol: '$', rate: 1.0, locale: 'en-US' },
@@ -1298,19 +1532,237 @@
       });
     }
 
-    // Nav tabs simulation
-    document.querySelectorAll('.nav-links li').forEach(li => {
-      li.addEventListener('click', () => {
-        document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('active'));
-        li.classList.add('active');
-        const viewName = li.textContent.trim();
-        showToast(`Switched view to ${viewName}`, '⚡');
+    // ============================================================
+    // AUTHENTICATION & USER PROFILE ENGINE
+    // ============================================================
+    const DEFAULT_USER = {
+      name: 'Deepak Konijeti',
+      email: 'deepak@portfolio.io',
+      role: 'Staff Architect & Lead Dev',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+      tier: 'Pro Enterprise'
+    };
+
+    function getCurrentUser() {
+      try {
+        const u = localStorage.getItem(DB_KEY_USER);
+        if (u) return JSON.parse(u);
+      } catch(e) {}
+      return DEFAULT_USER;
+    }
+
+    function setCurrentUser(user) {
+      localStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+      syncUserProfileUI();
+    }
+
+    function syncUserProfileUI() {
+      const u = getCurrentUser();
+      const nameEl = document.getElementById('userProfileName');
+      const emailEl = document.getElementById('userProfileEmail');
+      const roleEl = document.getElementById('userProfileRole');
+      const avatarEl = document.getElementById('userAvatarImg');
+      const menuAvatarEl = document.getElementById('menuUserAvatar');
+
+      if (nameEl) nameEl.textContent = u.name;
+      if (emailEl) emailEl.textContent = u.email;
+      if (roleEl) roleEl.textContent = u.role || 'Member';
+      if (avatarEl) avatarEl.src = u.avatar || DEFAULT_USER.avatar;
+      if (menuAvatarEl) menuAvatarEl.src = u.avatar || DEFAULT_USER.avatar;
+    }
+
+    // Auth Modal handling
+    const authModal = document.getElementById('authModal');
+    const authTabLogin = document.getElementById('authTabLogin');
+    const authTabSignup = document.getElementById('authTabSignup');
+    const authModalTitle = document.getElementById('authModalTitle');
+    const authModalDesc = document.getElementById('authModalDesc');
+    const authNameGroup = document.getElementById('authNameGroup');
+    const authNameInput = document.getElementById('authNameInput');
+    const authEmailInput = document.getElementById('authEmailInput');
+    const authPasswordInput = document.getElementById('authPasswordInput');
+    const btnSubmitAuth = document.getElementById('btnSubmitAuth');
+    const closeAuthBtn = document.getElementById('closeAuthBtn');
+    let authMode = 'login'; // 'login' or 'signup'
+
+    function openAuthModal(mode = 'login') {
+      authMode = mode;
+      if (authMode === 'login') {
+        if (authTabLogin) authTabLogin.classList.add('active');
+        if (authTabSignup) authTabSignup.classList.remove('active');
+        if (authModalTitle) authModalTitle.textContent = 'Welcome back to SpendTrack';
+        if (authModalDesc) authModalDesc.textContent = 'Sign in to access your synchronized enterprise accounts & analytics';
+        if (authNameGroup) authNameGroup.style.display = 'none';
+        if (btnSubmitAuth) btnSubmitAuth.textContent = 'Sign In to Account';
+      } else {
+        if (authTabSignup) authTabSignup.classList.add('active');
+        if (authTabLogin) authTabLogin.classList.remove('active');
+        if (authModalTitle) authModalTitle.textContent = 'Create your SpendTrack account';
+        if (authModalDesc) authModalDesc.textContent = 'Start tracking multi-currency cash flows and automated forecasts';
+        if (authNameGroup) authNameGroup.style.display = 'block';
+        if (btnSubmitAuth) btnSubmitAuth.textContent = 'Create Account & Continue';
+      }
+      if (authModal) authModal.classList.add('active');
+    }
+
+    function closeAuthModal() {
+      if (authModal) authModal.classList.remove('active');
+    }
+
+    if (authTabLogin) authTabLogin.addEventListener('click', () => openAuthModal('login'));
+    if (authTabSignup) authTabSignup.addEventListener('click', () => openAuthModal('signup'));
+    if (closeAuthBtn) closeAuthBtn.addEventListener('click', closeAuthModal);
+
+    // Quick OAuth buttons simulation
+    const btnGoogleAuth = document.getElementById('btnGoogleAuth');
+    const btnGithubAuth = document.getElementById('btnGithubAuth');
+
+    if (btnGoogleAuth) {
+      btnGoogleAuth.addEventListener('click', () => {
+        setCurrentUser({
+          name: 'Alex Rivera',
+          email: 'alex.rivera@gmail.com',
+          role: 'Google SSO Verified',
+          avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+          tier: 'Pro Enterprise'
+        });
+        closeAuthModal();
+        showToast('Signed in via Google SSO as Alex Rivera', '🚀');
       });
+    }
+
+    if (btnGithubAuth) {
+      btnGithubAuth.addEventListener('click', () => {
+        setCurrentUser({
+          name: 'Sarah Chen',
+          email: 'sarah.chen@github.com',
+          role: 'GitHub Dev Tier',
+          avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
+          tier: 'Pro Enterprise'
+        });
+        closeAuthModal();
+        showToast('Signed in via GitHub OAuth as Sarah Chen', '🐙');
+      });
+    }
+
+    if (btnSubmitAuth) {
+      btnSubmitAuth.addEventListener('click', () => {
+        const email = authEmailInput ? authEmailInput.value.trim() : '';
+        const password = authPasswordInput ? authPasswordInput.value.trim() : '';
+        const name = (authNameInput && authNameInput.value.trim()) || (email ? email.split('@')[0] : 'Member');
+
+        if (!email) {
+          showToast('Please enter your email address', '⚠️');
+          return;
+        }
+
+        setCurrentUser({
+          name: name.charAt(0).toUpperCase() + name.slice(1),
+          email: email,
+          role: authMode === 'signup' ? 'New Member' : 'Verified User',
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+          tier: 'Pro Enterprise'
+        });
+
+        closeAuthModal();
+        showToast(authMode === 'signup' ? `Welcome aboard, ${name}!` : `Welcome back, ${name}!`, '🎉');
+      });
+    }
+
+    // Profile Dropdown Toggle
+    const userProfilePill = document.getElementById('userProfilePill');
+    const userMenuDropdown = document.getElementById('userMenuDropdown');
+
+    if (userProfilePill && userMenuDropdown) {
+      userProfilePill.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userMenuDropdown.classList.toggle('active');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!userMenuDropdown.contains(e.target) && !userProfilePill.contains(e.target)) {
+          userMenuDropdown.classList.remove('active');
+        }
+      });
+    }
+
+    const menuSwitchAccount = document.getElementById('menuSwitchAccount');
+    const menuClearData = document.getElementById('menuClearData');
+    const menuLogout = document.getElementById('menuLogout');
+
+    if (menuSwitchAccount) {
+      menuSwitchAccount.addEventListener('click', () => {
+        if (userMenuDropdown) userMenuDropdown.classList.remove('active');
+        openAuthModal('login');
+      });
+    }
+
+    if (menuClearData) {
+      menuClearData.addEventListener('click', () => {
+        if (userMenuDropdown) userMenuDropdown.classList.remove('active');
+        if (confirm('Reset ledger and restore factory seed transactions?')) {
+          localStorage.removeItem(DB_KEY_TX);
+          recalculateDashboard();
+          showToast('Ledger reset to baseline template', '🔄');
+        }
+      });
+    }
+
+    if (menuLogout) {
+      menuLogout.addEventListener('click', () => {
+        if (userMenuDropdown) userMenuDropdown.classList.remove('active');
+        setCurrentUser({
+          name: 'Guest User',
+          email: 'guest@spendtrack.io',
+          role: 'Read-only Demo',
+          avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80',
+          tier: 'Free Preview'
+        });
+        showToast('Logged out to Guest Mode', '👋');
+        setTimeout(() => openAuthModal('login'), 600);
+      });
+    }
+
+    // ============================================================
+    // NAVIGATION TAB SWITCHER (DASHBOARD, ANALYTICS, BUDGETS, ACCOUNTS)
+    // ============================================================
+    const tabMap = {
+      'navTabDashboard': 'viewDashboard',
+      'navTabAnalytics': 'viewAnalytics',
+      'navTabBudgets': 'viewBudgets',
+      'navTabAccounts': 'viewAccounts'
+    };
+
+    function switchView(tabKey) {
+      const targetViewId = tabMap[tabKey];
+      if (!targetViewId) return;
+
+      document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+      const activeSec = document.getElementById(targetViewId);
+      if (activeSec) activeSec.classList.add('active');
+
+      document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
+      const activeNav = document.getElementById(tabKey);
+      if (activeNav) activeNav.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    Object.keys(tabMap).forEach(tabKey => {
+      const el = document.getElementById(tabKey);
+      if (el) {
+        el.addEventListener('click', () => {
+          switchView(tabKey);
+          const name = el.textContent.trim();
+          showToast(`Switched to ${name}`, '⚡');
+        });
+      }
     });
 
     // ============================================================
     // INITIAL BOOTSTRAP
     // ============================================================
+    syncUserProfileUI();
     updateCurrencySymbols();
     createSparkline('spark1', 'var(--blue)', [35, 55, 42, 68, 50, 75, 60, 85, 70, 90, 65, 80]);
     createSparkline('spark2', 'var(--green)', [40, 65, 55, 70, 80, 60, 75, 90, 68, 82, 72, 88]);

@@ -11,3 +11,4 @@ coverage/
 !public/assets/**
 cutout.ps1
 test_mod.js
+deploy_to_vercel.cjs
