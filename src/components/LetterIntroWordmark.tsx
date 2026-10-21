@@ -193,11 +193,11 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
       {(phase === 'portfolio_in' || phase === 'portfolio_settled') && (
         <div
           ref={titleBoxRef}
-          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center md:items-start w-full px-6 md:px-12 lg:px-16 max-w-7xl transition-all duration-700 pointer-events-none"
+          className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center w-full px-4 sm:px-8 md:px-12 max-w-[1400px] transition-all duration-700 pointer-events-none"
           style={{ top: phase === 'portfolio_settled' ? '83%' : '50%' }}
         >
           {/* Giant PORTFOLIO title docked at the lower boundary, scaled gracefully for laptops */}
-          <h1 className="w-full text-center md:text-left text-[11vw] sm:text-[9.5vw] md:text-[6.2rem] lg:text-[7.4rem] xl:text-[8.5rem] font-extrabold tracking-[-0.04em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none">
+          <h1 className="w-full flex items-center justify-center md:justify-start text-[10vw] sm:text-[9vw] md:text-[5.5rem] lg:text-[6.8rem] xl:text-[8rem] 2xl:text-[9.2rem] font-extrabold tracking-[-0.04em] drop-shadow-2xl leading-none uppercase text-metallic font-display select-none overflow-visible">
             <span className="inline-flex tracking-[-0.03em] whitespace-nowrap">
               {portfolioChars.map((char, i) => {
                 const isVisible = i < portfolioRevealed;
@@ -208,7 +208,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
                       isVisible
                         ? 'opacity-100 translate-y-0 scale-100'
                         : 'opacity-0 -translate-y-8 scale-90'
-                    } ${i < 4 ? 'text-white drop-shadow-[0_10px_35px_rgba(255,255,255,0.2)]' : 'text-gray-300'}`}
+                    }`}
                   >
                     {char}
                   </span>
