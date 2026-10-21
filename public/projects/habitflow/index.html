@@ -1107,35 +1107,88 @@
       margin-bottom: 8px;
     }
 
+    .auth-3d-banner {
+      width: 100%;
+      height: 180px;
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(108, 92, 231, 0.3);
+    }
+    .auth-3d-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      animation: zoomSlow 12s ease-in-out infinite alternate;
+    }
+    @keyframes zoomSlow {
+      0% { transform: scale(1.02) translateY(0px); }
+      100% { transform: scale(1.12) translateY(-6px); }
+    }
+    .auth-3d-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 10, 15, 0.2) 0%, rgba(10, 10, 15, 0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 14px 16px;
+    }
+    .auth-3d-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      background: rgba(108, 92, 231, 0.25);
+      border: 1px solid rgba(108, 92, 231, 0.4);
+      padding: 3px 8px;
+      border-radius: 999px;
+      width: fit-content;
+      margin-bottom: 4px;
+    }
+    .auth-3d-caption {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
     .auth-tabs {
       display: flex;
       gap: 6px;
       background: rgba(255, 255, 255, 0.04);
       padding: 4px;
-      border-radius: 12px;
-      margin-bottom: 18px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
     }
     .auth-tab-btn {
       flex: 1;
-      padding: 8px;
-      border-radius: 9px;
+      padding: 10px;
+      border-radius: 10px;
       background: transparent;
       border: none;
       color: var(--text-muted);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.25s;
     }
     .auth-tab-btn.active {
-      background: var(--accent);
+      background: linear-gradient(135deg, var(--accent), var(--pink));
       color: #fff;
-      box-shadow: 0 2px 10px var(--accent-glow);
+      box-shadow: 0 4px 15px var(--accent-glow);
     }
     .oauth-btn {
       width: 100%;
-      padding: 10px 14px;
-      border-radius: 12px;
+      padding: 11px 14px;
+      border-radius: 14px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       color: #fff;
@@ -1151,14 +1204,15 @@
     }
     .oauth-btn:hover {
       background: rgba(255, 255, 255, 0.08);
-      border-color: var(--border-hover);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
     }
     .auth-divider {
       display: flex;
       align-items: center;
       gap: 12px;
       color: var(--text-muted);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin: 12px 0 16px;
@@ -1525,6 +1579,15 @@
       <div class="modal-header">
         <h3 class="modal-title" id="authModalTitle">Welcome to HabitFlow</h3>
         <button class="modal-close" id="closeAuthModalBtn">&times;</button>
+      </div>
+
+      <!-- 3D Cosmic Habit Hourglass Hero Banner -->
+      <div class="auth-3d-banner">
+        <img src="assets/auth_3d_hero.jpg" alt="3D Zero Gravity Habit Energy Hourglass" />
+        <div class="auth-3d-overlay">
+          <div class="auth-3d-tag-badge">✨ ZERO GRAVITY FLOW</div>
+          <div class="auth-3d-caption">Atomic Consistency & Focus Engine</div>
+        </div>
       </div>
 
       <div class="auth-tabs">
