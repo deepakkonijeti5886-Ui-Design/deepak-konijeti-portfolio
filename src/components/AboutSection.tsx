@@ -12,8 +12,8 @@ export const AboutSection: React.FC = () => {
             <span className="text-[11px] font-mono font-bold tracking-[0.25em] text-gray-400 uppercase mb-4">
               ABOUT ME
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-[-0.03em] leading-none text-metallic uppercase select-none font-display">
-              Intro
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-normal leading-tight text-metallic uppercase select-none font-display inline-block pb-2 pr-4">
+              INTRO
             </h2>
           </div>
 

@@ -938,13 +938,15 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
     }
-    .modal-backdrop.open {
+    .modal-backdrop.open, .modal-backdrop.active {
       opacity: 1;
       pointer-events: auto;
     }
     .modal-sheet {
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
       background: #11131c;
       border: 1px solid var(--border);
       border-radius: 28px 28px 0 0;
@@ -953,7 +955,14 @@
       transform: translateY(100%);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .modal-backdrop.open .modal-sheet {
+    body.mode-laptop .modal-backdrop {
+      align-items: center;
+    }
+    body.mode-laptop .modal-sheet {
+      border-radius: 28px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(108, 92, 231, 0.25);
+    }
+    .modal-backdrop.open .modal-sheet, .modal-backdrop.active .modal-sheet {
       transform: translateY(0);
     }
     .modal-header {
@@ -2325,8 +2334,22 @@
     }
 
     function setHabitUser(user) {
-      localStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+      if (user) {
+        sessionStorage.setItem('habitflow_session_active', 'true');
+        sessionStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+        localStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+      } else {
+        sessionStorage.removeItem('habitflow_session_active');
+      }
       syncHabitUserUI();
+    }
+
+    function getHabitUser() {
+      try {
+        const u = sessionStorage.getItem(DB_KEY_USER) || localStorage.getItem(DB_KEY_USER);
+        if (u) return JSON.parse(u);
+      } catch(e) {}
+      return DEFAULT_HABIT_USER;
     }
 
     function syncHabitUserUI() {
@@ -2384,11 +2407,20 @@
         if (authNameGroup) authNameGroup.style.display = 'block';
         if (btnSubmitAuth) btnSubmitAuth.textContent = 'Create Account & Begin Flow';
       }
-      if (authModal) authModal.classList.add('active');
+      if (authModal) authModal.classList.add('open', 'active');
     }
 
     function closeAuthModal() {
-      if (authModal) authModal.classList.remove('active');
+      if (authModal) authModal.classList.remove('open', 'active');
+    }
+
+    if (authTabLogin) authTabLogin.addEventListener('click', () => openAuthModal('login'));
+    if (authTabSignup) authTabSignup.addEventListener('click', () => openAuthModal('signup'));
+    if (closeAuthModalBtn) closeAuthModalBtn.addEventListener('click', closeAuthModal);
+    if (authModal) {
+      authModal.addEventListener('click', (e) => {
+        if (e.target === authModal) closeAuthModal();
+      });
     }
 
     if (authTabLogin) authTabLogin.addEventListener('click', () => openAuthModal('login'));
@@ -2537,6 +2569,14 @@
     renderHabits();
     renderCalendar();
     renderStatsBars();
+
+    // Auto-prompt login on page visit for interactive mockup experience
+    if (!sessionStorage.getItem('habitflow_session_active')) {
+      setTimeout(() => {
+        openAuthModal('login');
+        showToast('Please sign in or select a demo habit profile', '🔐');
+      }, 350);
+    }
   </script>
 </body>
 </html>

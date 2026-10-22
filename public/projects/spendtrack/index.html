@@ -1839,14 +1839,21 @@
 
     function getCurrentUser() {
       try {
-        const u = localStorage.getItem(DB_KEY_USER);
+        const u = sessionStorage.getItem(DB_KEY_USER) || localStorage.getItem(DB_KEY_USER);
         if (u) return JSON.parse(u);
       } catch(e) {}
-      return DEFAULT_USER;
+      return null;
     }
 
     function setCurrentUser(user) {
-      localStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+      if (user) {
+        sessionStorage.setItem('spendtrack_session_active', 'true');
+        sessionStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+        localStorage.setItem(DB_KEY_USER, JSON.stringify(user));
+      } else {
+        sessionStorage.removeItem('spendtrack_session_active');
+        sessionStorage.removeItem(DB_KEY_USER);
+      }
       syncUserProfileUI();
     }
 
@@ -2112,6 +2119,14 @@
     createSparkline('spark2', 'var(--green)', [40, 65, 55, 70, 80, 60, 75, 90, 68, 82, 72, 88]);
     createSparkline('spark3', 'var(--red)', [50, 35, 60, 45, 70, 40, 55, 65, 50, 38, 58, 42]);
     recalculateDashboard();
+
+    // Auto-prompt login on page visit for interactive mockup experience
+    if (!sessionStorage.getItem('spendtrack_session_active')) {
+      setTimeout(() => {
+        openAuthModal('login');
+        showToast('Please sign in or choose a demo profile to continue', '🔐');
+      }, 350);
+    }
   </script>
 </body>
 </html>
