@@ -2325,13 +2325,7 @@
       targetXP: 3000
     };
 
-    function getHabitUser() {
-      try {
-        const u = localStorage.getItem(DB_KEY_USER);
-        if (u) return JSON.parse(u);
-      } catch(e) {}
-      return DEFAULT_HABIT_USER;
-    }
+
 
     function setHabitUser(user) {
       if (user) {
@@ -2427,12 +2421,9 @@
     if (authTabSignup) authTabSignup.addEventListener('click', () => openAuthModal('signup'));
     if (closeAuthModalBtn) closeAuthModalBtn.addEventListener('click', closeAuthModal);
 
-    // Profile top avatar click opens Auth / profile
-    const avatarBtn = document.getElementById('avatarBtn');
-    if (avatarBtn) {
-      avatarBtn.addEventListener('click', () => {
-        openAuthModal('login');
-      });
+    // Profile top avatar click - also wired to open Auth if needed
+    if (document.getElementById('avatarBtn')) {
+      document.getElementById('avatarBtn').title = 'Click to switch account or edit profile';
     }
 
     const btnSwitchAccount = document.getElementById('btnSwitchAccount');

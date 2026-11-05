@@ -20,7 +20,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ onOpenCaseStudy 
 
           <div className="max-w-md flex flex-col items-start gap-4">
             <p className="text-sm sm:text-base text-gray-400 font-light leading-relaxed">
-              As a product designer & full-stack engineer using modern architecture, high-conversion design systems, and universal visual craft tailored for measurable business impact.
+              Leading end-to-end product delivery from conceptualization and solution architecture through development, testing, and deployment, while partnering directly with business stakeholders to define requirements, validate solutions, and deliver high-quality e-commerce experiences that drive business value.
             </p>
             <a
               href="#casestudy"

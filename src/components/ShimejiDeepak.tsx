@@ -26,7 +26,7 @@ export const ALL_POSES: Record<ShimejiPose, PoseConfig> = {
     offsetY: 0,
     jokes: [
       "Sitting down enjoying warm chai while code compiles cleanly! ✨",
-      "Immediate joiner sitting ready for your technical interview! 💼",
+      "Ready for technical interview! 5+ years at TCS with a 90 Days Notice Period! 💼",
       "Sitting relaxed after shipping high-converting e-commerce components! 🚀"
     ]
   },
@@ -80,7 +80,7 @@ export const ALL_POSES: Record<ShimejiPose, PoseConfig> = {
     scale: 1.05,
     offsetY: 0,
     jokes: [
-      "Climbing up the browser window! Scaling platforms to 5M+ users! 🧗‍♂️",
+      "Climbing up the browser window! Scaling platforms to 10M+ users across Africa! 🧗‍♂️",
       "Hanging out on your screen border! Don't worry, my grip is rock solid! 🕷️",
       "Climbing to the top of the engineering ladder! 📈"
     ]

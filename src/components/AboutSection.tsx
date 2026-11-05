@@ -24,26 +24,26 @@ export const AboutSection: React.FC = () => {
               <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
               <p className="text-base sm:text-lg md:text-xl text-gray-300 font-light leading-relaxed sm:leading-relaxed">
-                Hey, I'm <strong className="font-bold text-white">Deepak</strong>. A UI Developer & Frontend Engineer with 4+ years of professional experience at Tata Consultancy Services (TCS), building scalable, high-performance UI components and applications for large-scale eCommerce platforms serving 5M+ users globally.
+                Hey, I'm <strong className="font-bold text-white">Deepak</strong>. A UI Developer & Frontend Engineer with 5+ years of professional experience at Tata Consultancy Services (TCS), building scalable, high-performance UI components and applications for large-scale eCommerce platforms serving 10m+ users across Africa region.
               </p>
 
               <p className="text-sm sm:text-base md:text-lg text-gray-400 font-light leading-relaxed mt-4 sm:mt-6">
-                Key work includes driving e-commerce performance on Clicks South Africa (clicks.co.za) — refactoring the checkout funnel to reduce cart abandonment by 15%, streamlining account onboarding with a +22% lift in sign-ups, and lifting PDP conversions by 3.5%.
+                Contributed to the growth of Clicks South Africa (clicks.co.za) by developing and managing content-driven experiences through SAP Commerce SmartEdit and redesigning the complete checkout flow. Focused on creating a smoother, more intuitive user journey that improved the overall online shopping experience.
               </p>
 
               {/* Quick credentials badges */}
               <div className="flex flex-wrap items-center gap-3 mt-8 pt-6 border-t border-white/6 text-xs font-mono text-gray-400">
                 <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300">
-                  ⚡ 4+ Years at TCS
+                  ⚡ 5+ Years at TCS
                 </span>
                 <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300">
-                  🏢 Ex-TCS UI Developer
+                  🏢 TCS UI Developer
                 </span>
                 <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300">
                   🏆 TCS On-the-Spot Award
                 </span>
-                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-emerald-400">
-                  ● Immediate Joiner
+                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-amber-300">
+                  ⏱️ 90 Days Notice Period
                 </span>
               </div>
             </div>

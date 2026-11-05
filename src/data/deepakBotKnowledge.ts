@@ -49,9 +49,9 @@ export const TOUR_STOPS: TourStop[] = [
     title: 'Intro & 4-Row Marquee Stack',
     shortSpeech: "Let's walk down to my background! I bridge design systems and full-stack engineering. Check out my obsidian intro card and the 4 horizontal infinite marquee rows of technologies I work with every day.",
     detailedNotes: [
-      "8+ years experience across high-impact enterprise & consumer products",
-      "Ex-Tata Consultancy Services (TCS) Senior Engineer with ILP Kudos & Excellence Awards",
-      "4-Row Infinite Marquee: Design Systems, SDUI, React 19, TypeScript, React Native, and CI/CD"
+      "5+ years experience across high-impact enterprise e-commerce platforms",
+      "Tata Consultancy Services (TCS) UI Developer with ILP Kudos & Excellence Awards",
+      "4-Row Infinite Marquee: HTML5, JavaScript, jQuery, Bootstrap, SAP Hybris, SmartEdit, CMS, and Agile"
     ],
     suggestedAction: {
       label: 'Inspect Stack',
@@ -139,15 +139,15 @@ export const BOT_KNOWLEDGE_BASE: BotQA[] = [
     id: 'bio',
     keywords: ['who', 'about', 'deepak', 'background', 'intro', 'summary', 'experience', 'person'],
     question: 'Tell me about Deepak Konijeti.',
-    answer: "I am Deepak Konijeti, a Senior Product Designer & Full-Stack Developer with 8+ years crafting high-impact enterprise & consumer digital experiences. Previously at Tata Consultancy Services (TCS), I specialize in server-driven UI, tokenized design systems, and conversion-optimized e-commerce checkouts.",
-    highlightFact: '8+ years experience • Ex-TCS Senior Engineer • ILP Excellence Winner',
+    answer: "I am Deepak Konijeti, a UI Developer with 5+ years of experience at Tata Consultancy Services (TCS) crafting high-performance enterprise e-commerce experiences serving 10m+ users across Africa region (Clicks South Africa). I specialize in JavaScript, SAP Commerce Cloud (Hybris), SmartEdit, and conversion-optimized checkouts.",
+    highlightFact: '5+ Years Experience • TCS UI Developer • 90 Days Notice Period',
     relatedStopId: 'about'
   },
   {
     id: 'contact',
     keywords: ['contact', 'email', 'phone', 'reach', 'hire', 'whatsapp', 'call', 'message', 'talk'],
     question: 'How do I contact or hire Deepak?',
-    answer: "You can reach me directly via email at deepak.konijeti5886@gmail.com or WhatsApp / phone at +91-9533095630. I'm based in Hyderabad, India and open to global remote opportunities as well as on-site contracts.",
+    answer: "You can reach me directly via email at deepak.konijeti5886@gmail.com or WhatsApp / phone at +91-9533095630. I'm based in Hyderabad, India and open to global remote opportunities as well as on-site contracts (90 Days Notice Period).",
     highlightFact: 'deepak.konijeti5886@gmail.com • +91-9533095630 (WhatsApp)',
     relatedStopId: 'contact'
   },
@@ -155,16 +155,16 @@ export const BOT_KNOWLEDGE_BASE: BotQA[] = [
     id: 'clicks',
     keywords: ['clicks', 'conversion', 'uplift', 'checkout', 'ecommerce', 'case study', 'results', 'stats', 'tcs'],
     question: 'What results did Deepak deliver on the Clicks project?',
-    answer: "On Clicks (a premier South African e-commerce retailer and TCS project, live at clicks.co.za), I served as Front End Developer using HTML5, CSS3, JavaScript, Bootstrap, jQuery, SAP Hybris, SmartEdit, Manual Testing, and Agile methodology. Key achievements: refactored checkout into a frictionless single-page UI (reducing cart abandonment by 15%), redesigned user registration/guest checkout (+22% sign-ups in month one), and re-architected PDP layouts to boost conversion rates by 3.5%.",
-    highlightFact: 'Clicks South Africa (clicks.co.za) • Front End Developer • -15% cart abandonment, +22% sign-ups',
+    answer: "On Clicks (a premier South African e-commerce retailer and TCS project, live at clicks.co.za), I served as Front End Developer using HTML5, CSS3, JavaScript, Bootstrap, jQuery, SAP Hybris, SmartEdit, Manual Testing, and Agile methodology. Contributed to the growth of Clicks South Africa by developing content-driven experiences via SmartEdit, Cart & Checkout redesign, PDP & Search optimization, ClubCard loyalty development, and insurance registration journeys.",
+    highlightFact: 'Clicks South Africa (clicks.co.za) • Front End Developer • 10m+ users across Africa',
     relatedStopId: 'project'
   },
   {
     id: 'tech-stack',
-    keywords: ['tech', 'stack', 'skills', 'tools', 'react', 'typescript', 'figma', 'code', 'technologies', 'tailwind'],
+    keywords: ['tech', 'stack', 'skills', 'tools', 'javascript', 'hybris', 'smartedit', 'html5', 'bootstrap', 'code', 'technologies'],
     question: 'What is Deepak’s core technology stack?',
-    answer: "My stack includes Figma & Design Tokens, React 19, TypeScript, Next.js, Tailwind CSS v4, WebGL / Three.js, React Native, Expo Router, Reanimated, Node.js, Express, PostgreSQL, Firebase, and automated testing with Playwright & GitHub Actions.",
-    highlightFact: 'Figma • React 19 • TypeScript • React Native • WebGL • Node.js',
+    answer: "My stack includes HTML5, JavaScript, jQuery, SASS/LESS, Bootstrap, SAP Hybris (SmartEdit, JDK 21), CMS, Backoffice, HAC, CSS3, Eclipse, IntelliJ, React Testing Library, Manual Testing, Scrum, Agile methodology, Salesforce Evergage, Salesforce Marketing Cloud, Solr, Algolia, PayU, GA4, Google Tag Manager, Modiface VTO, SVN, Bitbucket, Apache Ant, Grunt, and Webpack.",
+    highlightFact: 'JavaScript • SAP Hybris • SmartEdit • Bootstrap • jQuery • GA4 • PayU',
     relatedStopId: 'about'
   },
   {

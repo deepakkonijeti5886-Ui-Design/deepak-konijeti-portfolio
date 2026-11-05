@@ -246,7 +246,7 @@ export const DeepakWalkthroughBot: React.FC<DeepakWalkthroughBotProps> = ({ onNa
                   </span>
                 </div>
                 <p className="text-[10px] text-zinc-400 flex items-center gap-1 font-mono">
-                  Senior UI Developer &bull; TCS Bengaluru
+                  Senior UI Developer &bull; TCS Hyderabad
                 </p>
               </div>
             </div>

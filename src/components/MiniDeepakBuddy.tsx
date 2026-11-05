@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const FUNNY_MESSAGES = [
-  "Hey recruiter! 👋 Did you just click me? Guess what, Deepak is an Immediate Joiner!",
+  "Hey recruiter! 👋 Did you just click me? Guess what, Deepak brings 5+ years experience at TCS with a 90 Days Notice Period!",
   "Looking for clean React + TypeScript code? Deepak writes code smoother than butter! 🚀",
   "TCS 4+ years under the belt, zero Sev-1 incidents! Would you like to hire Deepak? 💼",
   "Beep boop! 🤖 99 bugs in the code, fix one... 127 bugs! Just kidding, Deepak's tests always pass! 🧪",

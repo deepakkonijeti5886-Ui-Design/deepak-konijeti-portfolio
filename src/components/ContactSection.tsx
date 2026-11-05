@@ -55,7 +55,7 @@ export const ContactSection: React.FC = () => {
           {/* Left Details Column */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-              Have an ambitious project, an enterprise design system requirement, or a full-stack engineering role? Let's build something exceptional together.
+              Have an ambitious project, an enterprise design system requirement, or a Frontend Developer role? Let's build something exceptional together.
             </p>
 
             <div className="flex flex-col gap-6 pt-4 border-t border-white/10">

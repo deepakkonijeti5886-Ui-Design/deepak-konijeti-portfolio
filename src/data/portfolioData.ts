@@ -33,12 +33,12 @@ export const PORTFOLIO_CONFIG = {
     bold: 'UI Developer',
     light: '& Frontend Engineer'
   },
-  bio: `Results-driven UI Developer with 4+ years of professional experience at Tata Consultancy Services (TCS), building scalable, high-performance UI components and applications for large-scale eCommerce platforms serving 5M+ users globally. Expert in React.js, TypeScript, React Native, Redux Toolkit, and Server-Driven UI (SDUI). Immediate joiner.`,
+  bio: `Results-driven UI Developer with 5+ years of professional experience at Tata Consultancy Services (TCS), building scalable, high-performance UI components and applications for large-scale eCommerce platforms serving 10m+ users across Africa region. Expert in JavaScript, SAP Hybris, SmartEdit, Content Management Systems (CMS), and modern frontend architecture. 90 Days Notice Period.`,
   email: 'deepak.konijeti5886@gmail.com',
   phone: '+91-9533095630',
   whatsapp: '919533095630',
-  location: 'Bengaluru, India',
-  availability: 'Immediate Joiner • Open to Global & Remote Opportunities',
+  location: 'Hyderabad, India',
+  availability: '90 Days Notice Period • Open to Global & Remote Opportunities',
   url: 'https://deepak-konijeti-portfolio.vercel.app',
   storeUrl: '#components',
   socials: {
@@ -50,125 +50,89 @@ export const PORTFOLIO_CONFIG = {
 
 export const STACK_ROWS: string[][] = [
   [
-    'Figma',
-    'Design Systems',
-    'SDUI Architecture',
-    'React 19',
-    'TypeScript',
-    'Tailwind CSS',
-    'Next.js',
-    'Three.js',
-    'WebGL',
-    'Motion / GSAP'
+    'HTML5',
+    'Javascript',
+    'Jquery',
+    'SASS/LESS',
+    'Bootstrap',
+    'Sap Hybris',
+    'SAP Hybris (SmartEdit, JDK 21)',
+    'Content management system (CMS)',
+    'Backoffice',
+    'HAC'
   ],
   [
-    'React Native',
-    'Expo Router',
-    'Reanimated',
-    'Gesture Handler',
-    'Node.js',
-    'Express',
-    'PostgreSQL',
-    'Firebase',
-    'Supabase',
-    'REST APIs'
+    'Css3',
+    'Eclipse',
+    'Intellij',
+    'react testing library',
+    'Manual testing',
+    'Scrum',
+    'Agile methodolgy',
+    'Salesforce Evergage',
+    'Salesforce Marketing Cloud',
+    'Solr'
   ],
   [
+    'Algolia',
+    'PayU',
+    'GA4',
+    'Google Tag Manager',
+    'Modiface VTO',
+    'SVN',
+    'Bitbucket',
+    'Apache Ant',
+    'Grunt',
+    'Webpack'
+  ],
+  [
+    'Scrum Master (SCM)',
+    'Agile/Scrum ceremonies',
+    'stakeholder management',
+    'team mentoring',
+    'AI agent-assisted development',
     'E-Commerce Optimization',
-    'Micro-Interactions',
-    'Design Tokens',
-    'A/B Testing',
-    'Playwright Automation',
-    'CI/CD Pipelines',
-    'Docker',
-    'GraphQL',
-    'State Machines'
-  ],
-  [
-    'Git',
-    'GitHub Actions',
-    'Postman',
-    'VS Code',
-    'Storybook',
-    'Usability Testing',
-    'Design Handoff',
-    'WCAG 2.1 AA',
-    'Core Web Vitals'
+    'Checkout Flow Redesign',
+    'Payment Integrations'
   ]
 ];
 
 export const SERVICES_LIST: ServiceItem[] = [
   {
     id: '01',
-    title: 'PRODUCT DESIGN & DESIGN SYSTEMS',
-    description: 'End-to-end UX/UI, tokenized design systems, component libraries, and interactive prototypes tailored for high-scale enterprise and consumer applications.',
+    title: 'ENTERPRISE E-COMMERCE & SAP COMMERCE (HYBRIS)',
+    description: 'Worked extensively with third-party platforms, payment providers, and the SAP Commerce team to build and maintain scalable e-commerce solutions for Clicks South Africa (clicks.co.za), enabling seamless customer journeys and secure online transactions.',
     capabilities: [
-      'Tokenized design systems & governance',
-      'Figma component architecture & auto-layout',
-      'Accessibility & WCAG 2.1 AA compliance',
-      'Interactive micro-animations & physics',
-      'Design handoff & engineering parity'
+      'SAP Commerce Cloud (Hybris) & SmartEdit expertise',
+      'Payment provider integrations and transaction workflows',
+      'Third-party service integration and API coordination',
+      'Checkout funnel redesign and customer journey optimization',
+      'Cross-functional collaboration with SAP, QA, and business stakeholders'
     ],
     buttonText: 'VIEW PROJECTS'
   },
   {
     id: '02',
-    title: 'SERVER-DRIVEN UI & WEB APPS',
-    description: 'Architecting high-performance web applications with Server-Driven UI (SDUI), dynamic layout engines, and zero-latency state management.',
+    title: 'CORE E-COMMERCE JOURNEYS & LOYALTY PLATFORMS',
+    description: 'Redesigned core e-commerce experiences for Clicks South Africa (clicks.co.za), including Cart, Product Listing, Product Description, and Search pages. Built new ClubCard loyalty program experiences and contributed to a strategic Insurance Registration platform, enhancing customer engagement and supporting key business initiatives.',
     capabilities: [
-      'React 19 & TypeScript',
-      'Next.js App Router & SSR',
-      'Dynamic JSON layout rendering',
-      'Tailwind CSS v4 & custom shaders',
-      'Real-time sync & offline caching'
+      'Cart & Checkout Experience Redesign',
+      'Product Listing & Search Experience Optimization',
+      'Product Description Page (PDP) Enhancements',
+      'ClubCard Loyalty Program Development',
+      'Insurance Registration Journey Implementation'
     ]
   },
   {
     id: '03',
-    title: 'MOBILE APP ENGINEERING',
-    description: 'Fluid cross-platform mobile experiences with 60fps animations, native gestures, and rock-solid offline-first state synchronization.',
+    title: 'TESTING, RELEASE MANAGEMENT & ZERO-DOWNTIME RELEASES',
+    description: 'Performed thorough manual testing, managed code deployments through Git and Bitbucket, and leveraged SAP Commerce Cloud for testing and production releases. Ensured stable, low-risk deployments without any downtime through rigorous validation and cross-team collaboration.',
     capabilities: [
-      'React Native & Expo Router',
-      'Reanimated 3 & Gesture Handler',
-      'In-app purchases & store subscriptions',
-      'Push notifications & deep linking',
-      'Play Store & App Store deployments'
-    ]
-  },
-  {
-    id: '04',
-    title: 'E-COMMERCE CONVERSION OPTIMIZATION',
-    description: 'Data-driven redesigns of checkout funnels, product display pages, and recommendation widgets that verifiably increase revenue and conversion rates.',
-    capabilities: [
-      '15% reduced cart abandonment on Clicks e-commerce',
-      'Single-page frictionless checkout UI',
-      'Cart abandonment recovery UX',
-      'Real-time inventory & dynamic pricing',
-      'Performance budgets & Core Web Vitals'
-    ]
-  },
-  {
-    id: '05',
-    title: 'BACKEND SERVICES & APIS',
-    description: 'Secure, scalable backend services, cloud databases, role-based access control, and payment gateway integrations.',
-    capabilities: [
-      'Node.js, Express & TypeScript',
-      'PostgreSQL, Supabase & Cloud SQL',
-      'Firebase Firestore & Auth',
-      'Stripe & Razorpay payment pipelines',
-      'Secure REST & GraphQL APIs'
-    ]
-  },
-  {
-    id: '06',
-    title: 'QA AUTOMATION & CI/CD',
-    description: 'Automated end-to-end testing, visual regression suites, and continuous delivery pipelines that ensure zero-defect deployments.',
-    capabilities: [
-      'Playwright web & mobile test suites',
-      'GitHub Actions CI/CD workflows',
-      'Visual regression & diff checks',
-      'Docker containerization',
-      'Zero-downtime rolling releases'
+      'End-to-End Testing & Quality Assurance',
+      'Bitbucket Workflow & Release Management',
+      'SAP Commerce Cloud Deployments',
+      'Cross-Functional Release Validation',
+      'Stable, Zero-Downtime Production Releases'
     ]
   }
 ];
@@ -339,14 +303,14 @@ export const CLICKS_CASE_STUDY = {
     'High mobile cart abandonment at 68%'
   ],
   architectureSteps: [
-    { title: 'Server-Driven UI Engine', description: 'Dynamic JSON components rendered with zero latency' },
-    { title: 'Frictionless Guest Funnel', description: 'One-step checkout with instant verification' },
-    { title: 'Optimistic State Sync', description: 'Zero perceived latency cart interactions' }
+    { title: 'End-to-End Testing & QA', description: 'Rigorous manual and integration testing for all flows' },
+    { title: 'Bitbucket & Git Releases', description: 'Structured workflow & branch management' },
+    { title: 'SAP Commerce Deployments', description: 'Zero-downtime production deployments' }
   ],
   deliverables: [
-    'Complete component design system',
-    'Automated Playwright regression suite',
-    'Interactive micro-animations & tokens'
+    'Cart & Checkout Redesign',
+    'PDP & Search Experience Optimization',
+    'ClubCard & Insurance Registration'
   ]
 };
 

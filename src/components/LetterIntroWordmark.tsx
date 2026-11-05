@@ -225,8 +225,11 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
             <div className="flex items-center gap-2">
               <p className="text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-white">
                 UI Developer{' '}
+                <span className="font-extrabold text-white">
+                  & Frontend Engineer
+                </span>{' '}
                 <span className="font-light italic text-gray-300 font-editorial text-xl md:text-2xl lg:text-3xl">
-                  & Frontend Engineer (React / TypeScript / Next.js)
+                  (JavaScript)
                 </span>
               </p>
             </div>
