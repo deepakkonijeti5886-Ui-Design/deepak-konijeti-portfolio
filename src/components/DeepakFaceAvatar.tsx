@@ -84,9 +84,9 @@ export const DeepakFaceAvatar: React.FC<DeepakFaceAvatarProps> = ({
       >
         {customPhotoSrc || usePhoto ? (
           <img
-            src={customPhotoSrc || '/assets/deepak_portrait_square.jpg'}
+            src={customPhotoSrc || '/assets/deepak_avatar_transparent.png'}
             alt="Deepak Konijeti"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-[center_top]"
           />
         ) : (
           <svg
