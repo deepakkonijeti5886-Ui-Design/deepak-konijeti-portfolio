@@ -9,6 +9,7 @@ import { ComponentsSection } from './components/ComponentsSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ShimejiDeepak } from './components/ShimejiDeepak';
+import { ScrollProgressHUD } from './components/ScrollProgressHUD';
 import { PORTFOLIO_CONFIG } from './data/portfolioData';
 
 export default function App() {
@@ -47,6 +48,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white relative selection:bg-white selection:text-black">
+      {/* Precision Scroll Progress HUD (Neon top tracker & micro status pill) */}
+      <ScrollProgressHUD />
+
       {/* Sticky Navigation Bar with active indicator */}
       <Navbar
         activeSection={activeSection}

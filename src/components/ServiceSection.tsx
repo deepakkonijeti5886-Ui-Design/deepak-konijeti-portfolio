@@ -33,30 +33,48 @@ export const ServiceSection: React.FC<ServiceSectionProps> = ({ onNavigateToProj
             const isOpen = openId === service.id;
 
             return (
-              <div key={service.id} className="transition-colors duration-200">
+              <div
+                key={service.id}
+                className={`transition-all duration-300 rounded-2xl ${
+                  isOpen ? 'bg-white/[0.02] border border-white/10 my-3 shadow-xl' : 'hover:bg-white/[0.01]'
+                }`}
+              >
                 {/* Header Row */}
                 <button
                   onClick={() => toggleItem(service.id)}
                   aria-expanded={isOpen}
-                  className="w-full py-8 md:py-10 flex items-center justify-between text-left group cursor-pointer focus:outline-none"
+                  className="w-full py-7 md:py-9 px-4 sm:px-6 flex items-center justify-between text-left group cursor-pointer focus:outline-none"
                 >
-                  <div className="flex items-baseline gap-6 md:gap-12">
-                    {/* Number */}
-                    <span className="text-xl md:text-2xl font-mono font-bold text-gray-500 group-hover:text-white transition-colors duration-200">
-                      {service.id}
-                    </span>
+                  <div className="flex items-baseline gap-6 md:gap-10">
+                    {/* Number with pulsing indicator */}
+                    <div className="flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        isOpen ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] scale-110' : 'bg-zinc-700 group-hover:bg-zinc-400'
+                      }`} />
+                      <span className={`text-xl md:text-2xl font-mono font-bold transition-colors duration-200 ${
+                        isOpen ? 'text-white' : 'text-gray-500 group-hover:text-white'
+                      }`}>
+                        {service.id}
+                      </span>
+                    </div>
 
                     {/* Service Title */}
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight uppercase text-white group-hover:text-gray-200 transition-colors duration-200">
+                    <h3 className={`text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight uppercase transition-all duration-200 ${
+                      isOpen ? 'text-white translate-x-1' : 'text-zinc-300 group-hover:text-white group-hover:translate-x-1'
+                    }`}>
                       {service.title}
                     </h3>
                   </div>
 
-                  {/* Arrow Indicator */}
-                  <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:border-white/30 transition-all duration-300">
+                  {/* Arrow Indicator with glowing halo */}
+                  <div className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all duration-300 ${
+                    isOpen
+                      ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.25)]'
+                      : 'border-white/10 text-gray-400 group-hover:text-white group-hover:border-white/30 group-hover:scale-105'
+                  }`}>
                     <svg
                       className={`w-5 h-5 transition-transform duration-300 ${
-                        isOpen ? 'rotate-90 text-white' : 'group-hover:translate-x-0.5 group-hover:translate-y-0.5'
+                        isOpen ? 'rotate-90 text-emerald-300' : 'group-hover:translate-x-0.5 group-hover:translate-y-0.5'
                       }`}
                       viewBox="0 0 24 24"
                       fill="none"

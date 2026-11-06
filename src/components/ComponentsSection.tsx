@@ -80,7 +80,7 @@ export const ComponentsSection: React.FC = () => {
             <div
               key={item.slug}
               onMouseEnter={() => setActiveIndex(idx)}
-              className="relative shrink-0 snap-start w-[280px] sm:w-[320px] lg:w-[340px] flex flex-col group border border-white/10 hover:border-white/35 rounded-2xl overflow-hidden bg-[#0d0d11] transition-all duration-300"
+              className="relative shrink-0 snap-start w-[280px] sm:w-[320px] lg:w-[340px] flex flex-col group border border-white/10 hover:border-cyan-400/40 rounded-2xl overflow-hidden bg-[#0d0d11] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.8),0_0_25px_rgba(34,211,238,0.15)] cursor-pointer"
             >
               {/* Video Reel or Poster */}
               <div className="relative w-full aspect-[9/16] overflow-hidden bg-black/60">

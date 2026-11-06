@@ -1,5 +1,6 @@
 import React from 'react';
 import { PROJECTS_LIST } from '../data/portfolioData';
+import { TiltMockup } from './TiltMockup';
 
 interface ProjectSectionProps {
   onOpenCaseStudy?: (projectId: string) => void;
@@ -51,13 +52,11 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ onOpenCaseStudy 
                   isReversed ? 'lg:grid-flow-dense' : ''
                 }`}
               >
-                {/* Visual Device Mockup */}
+                {/* Visual Device Mockup with 3D Parallax Tilt */}
                 <div className={`lg:col-span-6 ${isReversed ? 'lg:col-start-7' : ''}`}>
-                  <a
+                  <TiltMockup
                     href={proj.live || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#121318] to-[#090a0d] border border-white/10 p-3 sm:p-5 shadow-2xl transition-all duration-500 hover:border-white/30 hover:shadow-[0_25px_60px_rgba(0,0,0,0.85)] cursor-pointer"
+                    className="group relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#121318] to-[#090a0d] border border-white/10 p-3 sm:p-5 shadow-2xl transition-all duration-500 hover:border-white/35 hover:shadow-[0_30px_70px_rgba(0,0,0,0.9)]"
                   >
                     <div className="relative aspect-[16/10] sm:aspect-[16/11] rounded-2xl overflow-hidden bg-black/60">
                       <img
@@ -69,7 +68,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ onOpenCaseStudy 
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300" />
                       
                       {/* Overlay indicator */}
-                      <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/70 border border-white/20 backdrop-blur-md text-white text-[11px] font-mono font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-black/70 border border-white/20 backdrop-blur-md text-white text-[11px] font-mono font-medium flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
                         <span>Open Live UI</span>
                         <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                           <line x1="7" y1="17" x2="17" y2="7" />
@@ -78,13 +77,13 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({ onOpenCaseStudy 
                       </div>
                     </div>
 
-                    {/* Metrics badge if present */}
+                    {/* Metrics badge with pulsing glow */}
                     {proj.metrics && (
-                      <div className="absolute bottom-6 left-6 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-emerald-400 text-xs font-mono font-bold tracking-wider">
+                      <div className="absolute bottom-6 left-6 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 backdrop-blur-md text-emerald-400 text-xs font-mono font-bold tracking-wider shadow-[0_0_15px_rgba(52,211,153,0.3)]">
                         ★ {proj.metrics}
                       </div>
                     )}
-                  </a>
+                  </TiltMockup>
                 </div>
 
                 {/* Project Details */}

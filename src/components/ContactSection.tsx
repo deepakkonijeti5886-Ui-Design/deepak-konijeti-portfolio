@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2, ArrowUpRight } from 'lucide-react';
 import { PORTFOLIO_CONFIG } from '../data/portfolioData';
+import { GlowCard } from './GlowCard';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -143,7 +144,11 @@ export const ContactSection: React.FC = () => {
 
           {/* Right Form Column */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl p-8 sm:p-10 bg-[#0d0e12]/90 border border-white/10 backdrop-blur-xl shadow-2xl">
+            <GlowCard
+              glowColor="rgba(255, 255, 255, 0.06)"
+              borderGlowColor="rgba(255, 255, 255, 0.25)"
+              className="rounded-3xl p-8 sm:p-10 bg-[#0d0e12]/90 border border-white/10 backdrop-blur-xl shadow-2xl hover:border-white/20 transition-all duration-300"
+            >
               {submitted ? (
                 <div className="py-12 flex flex-col items-center text-center">
                   <CheckCircle2 className="w-16 h-16 text-emerald-400 mb-4 animate-bounce" />
@@ -227,7 +232,7 @@ export const ContactSection: React.FC = () => {
                   </button>
                 </form>
               )}
-            </div>
+            </GlowCard>
           </div>
         </div>
       </div>

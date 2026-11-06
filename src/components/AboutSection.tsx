@@ -1,5 +1,6 @@
 import React from 'react';
 import { PORTFOLIO_CONFIG, STACK_ROWS } from '../data/portfolioData';
+import { GlowCard } from './GlowCard';
 
 export const AboutSection: React.FC = () => {
   return (
@@ -17,11 +18,16 @@ export const AboutSection: React.FC = () => {
             </h2>
           </div>
 
-          {/* Right Column: Sleek Obsidian Card */}
+          {/* Right Column: Sleek Obsidian Card with Reactive Spotlight Glow */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-3xl p-8 sm:p-10 md:p-12 bg-[#0c0d11]/80 border border-white/8 backdrop-blur-xl shadow-2xl transition-all duration-300 hover:border-white/15">
-              {/* Subtle top glare highlight */}
-              <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <GlowCard
+              glowColor="rgba(52, 211, 153, 0.08)"
+              borderGlowColor="rgba(255, 255, 255, 0.3)"
+              className="rounded-3xl p-8 sm:p-10 md:p-12 bg-[#0c0d11]/90 border border-white/10 backdrop-blur-2xl shadow-2xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+            >
+              {/* Subtle top glare highlight + ambient shimmer */}
+              <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+              <div className="absolute -inset-x-20 top-0 h-24 animate-shimmer pointer-events-none opacity-40" />
 
               <p className="text-base sm:text-lg md:text-xl text-gray-300 font-light leading-relaxed sm:leading-relaxed">
                 Hey, I'm <strong className="font-bold text-white">Deepak</strong>. A UI Developer & Frontend Engineer with 5+ years of professional experience at Tata Consultancy Services (TCS), building scalable, high-performance UI components and applications for large-scale eCommerce platforms serving 10m+ users across Africa region.
@@ -31,22 +37,22 @@ export const AboutSection: React.FC = () => {
                 Contributed to the growth of Clicks South Africa (clicks.co.za) by developing and managing content-driven experiences through SAP Commerce SmartEdit and redesigning the complete checkout flow. Focused on creating a smoother, more intuitive user journey that improved the overall online shopping experience.
               </p>
 
-              {/* Quick credentials badges */}
+              {/* Quick credentials badges with micro hover animations */}
               <div className="flex flex-wrap items-center gap-3 mt-8 pt-6 border-t border-white/6 text-xs font-mono text-gray-400">
-                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300">
+                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-white transition-all duration-200 cursor-default">
                   ⚡ 5+ Years at TCS
                 </span>
-                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300">
+                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 hover:text-white transition-all duration-200 cursor-default">
                   🏢 TCS UI Developer
                 </span>
-                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-300">
+                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-amber-400/40 hover:bg-amber-400/10 hover:text-white transition-all duration-200 cursor-default">
                   🏆 TCS On-the-Spot Award
                 </span>
-                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-amber-300">
+                <span className="px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 hover:border-amber-400 hover:bg-amber-500/20 transition-all duration-200 cursor-default">
                   ⏱️ 90 Days Notice Period
                 </span>
               </div>
-            </div>
+            </GlowCard>
           </div>
         </div>
 

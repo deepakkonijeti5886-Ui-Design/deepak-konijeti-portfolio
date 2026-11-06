@@ -96,3 +96,27 @@
 .border-subtle-hover:hover {
   border-color: rgba(255, 255, 255, 0.22);
 }
+
+/* Ambient Subtle Shimmer for metallic cards and badges */
+@keyframes ambient-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: ambient-shimmer 6s infinite linear;
+}
+
+/* Luxury 3D Tilt perspective utility */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
