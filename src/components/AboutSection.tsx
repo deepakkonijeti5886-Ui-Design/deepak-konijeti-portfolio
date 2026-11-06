@@ -7,15 +7,49 @@ export const AboutSection: React.FC = () => {
     <section id="about" className="relative min-h-screen bg-[#050505] text-white pt-24 pb-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Top Header & Intro Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Label + Sleek Metallic "Intro" */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Label + Sleek Metallic "Intro" + 3D Holographic Portrait Card */}
           <div className="lg:col-span-5 flex flex-col justify-start">
             <span className="text-[11px] font-mono font-bold tracking-[0.25em] text-gray-400 uppercase mb-4">
               ABOUT ME
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-normal leading-tight text-metallic uppercase select-none font-display inline-block pb-2 pr-4">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-normal leading-tight text-metallic uppercase select-none font-display inline-block pb-4 pr-4">
               INTRO
             </h2>
+
+            {/* Premium 3D Portrait Frame */}
+            <div className="relative mt-2 max-w-sm group">
+              {/* Ambient holographic backlight */}
+              <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-amber-500/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              
+              <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-gradient-to-b from-[#14161f] to-[#0a0a0d] p-3 shadow-2xl transition-all duration-500 group-hover:border-white/35 group-hover:scale-[1.02]">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-black/60">
+                  <img
+                    src="/assets/deepak_portrait.jpg"
+                    alt="Deepak Konijeti - Senior UI Developer"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+                  {/* Corner Accent Badge */}
+                  <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/70 border border-white/20 backdrop-blur-md text-[10px] font-mono font-semibold text-white tracking-widest uppercase flex items-center gap-1.5 shadow-lg">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                    <span>DEEPAK K.</span>
+                  </div>
+
+                  {/* Bottom Role Info on Portrait */}
+                  <div className="absolute bottom-3.5 inset-x-3.5 p-3 rounded-xl bg-black/60 border border-white/10 backdrop-blur-md flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-bold text-white tracking-wide">Deepak Konijeti</div>
+                      <div className="text-[10px] font-mono text-emerald-400">UI Developer • 5+ Yrs TCS</div>
+                    </div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-semibold">
+                      VERIFIED
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Right Column: Sleek Obsidian Card with Reactive Spotlight Glow */}
