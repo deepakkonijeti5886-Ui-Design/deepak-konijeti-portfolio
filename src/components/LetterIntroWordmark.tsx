@@ -229,7 +229,7 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
                   & Frontend Engineer
                 </span>{' '}
                 <span className="font-light italic text-gray-300 font-editorial text-xl md:text-2xl lg:text-3xl">
-                  (JavaScript)
+                  (React.js / JavaScript)
                 </span>
               </p>
             </div>

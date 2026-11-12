@@ -33,12 +33,12 @@ export const PORTFOLIO_CONFIG = {
     bold: 'UI Developer',
     light: '& Frontend Engineer'
   },
-  bio: `Results-driven UI Developer with 5+ years of professional experience at Tata Consultancy Services (TCS), building scalable, high-performance UI components and applications for large-scale eCommerce platforms serving 10m+ users across Africa region. Expert in JavaScript, SAP Hybris, SmartEdit, Content Management Systems (CMS), and modern frontend architecture. 90 Days Notice Period.`,
+  bio: `Results-driven UI Developer with 5+ years of professional experience at Tata Consultancy Services (TCS), building scalable, high-performance UI components and applications for large-scale eCommerce platforms serving 10m+ users across Africa region. Expert in JavaScript, SAP Hybris, SmartEdit, Content Management Systems (CMS), and modern frontend architecture. 45-60 Days Notice Period.`,
   email: 'deepak.konijeti5886@gmail.com',
   phone: '+91-9533095630',
   whatsapp: '919533095630',
   location: 'Hyderabad, India',
-  availability: '90 Days Notice Period • Open to Global & Remote Opportunities',
+  availability: '45-60 Days Notice Period • Open to Global & Remote Opportunities',
   url: 'https://deepak-konijeti-portfolio.vercel.app',
   storeUrl: '#components',
   socials: {
@@ -149,14 +149,13 @@ export const PROJECTS_LIST: ProjectItem[] = [
     role: 'Front End Developer',
     technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'jQuery', 'SAP Hybris', 'SmartEdit', 'Manual Testing', 'Agile Methodology'],
     achievements: [
-      'Streamlined Checkout Funnel: Refactored a complex, multi-step checkout into a frictionless single-page checkout UI, reducing cart abandonment by 15% and boosting successful transactions.',
+      'Redesigned Multi-Step Checkout Funnel: Rebuilt the existing multi-page checkout flow with a clearer, more intuitive UI, making it easier for users to understand each step and place orders smoothly, reducing cart abandonment by 15% and boosting successful transactions.',
       'Onboarding & Account Creation Fix: Redesigned the user registration and instant guest-checkout flow, resulting in an immediate 22% increase in sign-ups within the first month.',
       'High-Converting Product Pages: Re-architected the Product Detail Page (PDP) layout to prioritize immediate calls-to-action (e.g., "Add to Cart", "Buy Now"), driving a 3.5% lift in total conversion rates.'
     ],
     image: '/assets/ecommerce.jpg',
     live: 'https://clicks.co.za',
-    liveLabel: 'Visit Live Store',
-    metrics: '+15% Checkout Funnel'
+    liveLabel: 'Visit Live Store'
   },
   {
     id: '02',

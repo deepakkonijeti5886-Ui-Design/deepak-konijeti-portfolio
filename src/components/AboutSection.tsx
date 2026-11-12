@@ -21,12 +21,12 @@ export const AboutSection: React.FC = () => {
             <div className="relative mt-2 max-w-sm group">
               {/* Ambient holographic backlight */}
               <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-amber-500/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-              
+
               <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-gradient-to-b from-[#14161f] to-[#0a0a0d] p-3 shadow-2xl transition-all duration-500 group-hover:border-white/35 group-hover:scale-[1.02]">
                 <div className="relative aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-b from-[#181a24] via-[#0d0e14] to-[#08080a] flex items-end justify-center">
                   {/* Subtle inner radial spotlight */}
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none" />
-                  
+
                   <img
                     src="/assets/deepak_portrait.png"
                     alt="Deepak Konijeti - Senior UI Developer"
@@ -85,8 +85,8 @@ export const AboutSection: React.FC = () => {
                 <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-amber-400/40 hover:bg-amber-400/10 hover:text-white transition-all duration-200 cursor-default">
                   🏆 TCS On-the-Spot Award
                 </span>
-                <span className="px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 hover:border-amber-400 hover:bg-amber-500/20 transition-all duration-200 cursor-default">
-                  ⏱️ 90 Days Notice Period
+                <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/10 hover:text-white transition-all duration-200 cursor-default">
+                  ⏱️ 45-60 Days Notice Period
                 </span>
               </div>
             </GlowCard>

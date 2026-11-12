@@ -26,7 +26,7 @@ export const ALL_POSES: Record<ShimejiPose, PoseConfig> = {
     offsetY: 0,
     jokes: [
       "Sitting down enjoying warm chai while code compiles cleanly! ✨",
-      "Ready for technical interview! 5+ years at TCS with a 90 Days Notice Period! 💼",
+      "Ready for technical interview! 5+ years at TCS with a 45-60 Days Notice Period! 💼",
       "Sitting relaxed after shipping high-converting e-commerce components! 🚀"
     ]
   },

@@ -140,14 +140,14 @@ export const BOT_KNOWLEDGE_BASE: BotQA[] = [
     keywords: ['who', 'about', 'deepak', 'background', 'intro', 'summary', 'experience', 'person'],
     question: 'Tell me about Deepak Konijeti.',
     answer: "I am Deepak Konijeti, a UI Developer with 5+ years of experience at Tata Consultancy Services (TCS) crafting high-performance enterprise e-commerce experiences serving 10m+ users across Africa region (Clicks South Africa). I specialize in JavaScript, SAP Commerce Cloud (Hybris), SmartEdit, and conversion-optimized checkouts.",
-    highlightFact: '5+ Years Experience • TCS UI Developer • 90 Days Notice Period',
+    highlightFact: '5+ Years Experience • TCS UI Developer • 45-60 Days Notice Period',
     relatedStopId: 'about'
   },
   {
     id: 'contact',
     keywords: ['contact', 'email', 'phone', 'reach', 'hire', 'whatsapp', 'call', 'message', 'talk'],
     question: 'How do I contact or hire Deepak?',
-    answer: "You can reach me directly via email at deepak.konijeti5886@gmail.com or WhatsApp / phone at +91-9533095630. I'm based in Hyderabad, India and open to global remote opportunities as well as on-site contracts (90 Days Notice Period).",
+    answer: "You can reach me directly via email at deepak.konijeti5886@gmail.com or WhatsApp / phone at +91-9533095630. I'm based in Hyderabad, India and open to global remote opportunities as well as on-site contracts (45-60 Days Notice Period).",
     highlightFact: 'deepak.konijeti5886@gmail.com • +91-9533095630 (WhatsApp)',
     relatedStopId: 'contact'
   },
