@@ -222,13 +222,13 @@ export const LetterIntroWordmark: React.FC<LetterIntroWordmarkProps> = ({
             ref={subtitleRef}
             className="w-full flex flex-col md:flex-row md:items-center justify-between gap-4 mt-2 md:mt-3 opacity-0 pointer-events-auto"
           >
-            <div className="flex items-center gap-2">
-              <p className="text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-white">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.8)]">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                 UI Developer{' '}
                 <span className="font-extrabold text-white">
                   & Frontend Engineer
                 </span>{' '}
-                <span className="font-light italic text-gray-300 font-editorial text-xl md:text-2xl lg:text-3xl">
+                <span className="font-semibold text-cyan-400 font-editorial text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-[0_0_12px_rgba(34,211,238,0.5)]">
                   (React.js / JavaScript)
                 </span>
               </p>
